@@ -1,0 +1,15 @@
+#!/bin/csh -f
+
+set repo = $argv[1]
+set release = $argv[2]
+
+foreach host (ec2-54-200-238-82.us-west-2.compute.amazonaws.com)
+
+ssh -i ~/AWS/bill-boyer.com.pem.txt root@$host << EOF
+
+curl https://raw.github.com/wboyer/utils/master/scripts/deploy/aws-suse-web > aws-suse-web
+chmod +x aws-suse-web
+./aws-suse-web $repo $release
+/bin/rm aws-suse-web
+
+EOF
