@@ -1,29 +1,104 @@
 <!doctype html>
 <html lang="en">
+
 <head prefix="og: http://ogp.me/ns#">
+
 <meta charset="UTF-8">
-<link rel="icon" href="/img/favicon.png" type="image/png" />
-<link href="/css/main.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width">
+
 <title>bill-boyer.com</title>
 <meta name="description" content="Bill Boyer is a software developer, architect, and technical leader based in NYC.  This is his personal site." />
+<link rel="icon" href="/img/favicon.png" type="image/png" />
+
 <meta property="og:title" content="bill-boyer.com" />
 <meta property="og:description" content="Bill Boyer is a software developer, architect, and technical leader based in NYC.  This is his personal site." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://www.bill-boyer.com" />
 <meta property="og:image" content="http://www.bill-boyer.com/img/boyer.jpg" />
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css">
+<link href="/css/main.css" rel="stylesheet" type="text/css">
+
 </head>
+
 <body>
-<h1>bill-boyer.com</h1>
+
+<nav class="navbar navbar-default" role="navigation">
+
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="/">bill-boyer.com</a>
+</div>
+
+<div class="collapse navbar-collapse" id="navbar-collapse">
+<ul class="nav navbar-nav navbar-right">
+<li><a href="#">about me</a></li>
+<li><a href="#">about this site</a></li>
+<li><a href="#">demos</a></li>
+</ul>
+</div>
+
+</nav>
+
+<div class="col-lg-10 col-lg-push-2">
+
+<h1>welcome</h1>
+
 <p>I’m Bill Boyer, a software developer, architect and technical leader based in NYC. Most recently, I led software development for Viacom’s digital properties.</p>
+
 <p>Right now, I’m getting hands-on experience with new web technologies, informally consulting for a few friends, and working on a couple of side projects that interest me &#8212; one of which is this site, a testbed that I'll use to reinforce my understanding of new tools, platforms and best practices.</p>
+
 <p>Most of what I do here will be basic, and will borrow heavily from innumerable examples, docs and other resources from all over the web.  I'll do my best to document everything here, and include links to the resources I've found helpful.</p>
-<p>
+
 <h2>profiles on other sites</h2>
+
 <p>
 <ul>
 <li><a href="http://www.linkedin.com/pub/william-boyer/67/93a/a99">LinkedIn</a></li>
 <li><a href="https://plus.google.com/107831511220447646083?rel=author">Google+</a></li>
 <li><a href="https://www.facebook.com/william.boyer.nyc">Facebook</a></li>
+<li><a href="https://github.com/wboyer">GitHub</a></li>
+</ul>
 </p>
+
+</div>
+
+<div class="col-lg-2 col-lg-pull-10">
+      
+<div class="panel panel-default">
+<div class="panel-heading">about this page</div>
+<div class="panel-body">
+This panel will appear on every page, briefly describing how the page has been implemented.  The "more..." button will open an overlay with more detailed information. 
+<br/>
+<br/>
+<button id="page-info" type="button" class="btn btn-default" style="float: right" rel="popover" data-content="coming soon"><span class="glyphicon glyphicon-info-sign"></span> more...</button>
+</div>  
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading">share</div>
+<div class="panel-body">
+<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share"></span></button>
+<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share"></span></button>
+<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share"></span></button>
+</div>  
+</div>
+
+</div>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+
+<script>
+$(function (){
+$("#page-info").popover({placement: "top"});
+});
+</script>
+
 </body>
 </html>
