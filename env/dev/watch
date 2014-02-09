@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd /srv/node/api.bill-boyer.com
+cp /vagrant/Gruntfile.js .
+cp /vagrant-mnt/facts-db/package.json .
+/bin/rm -rf dist/* ../../www/dist/*
+grunt copy-build
+grunt watch

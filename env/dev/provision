@@ -1,0 +1,48 @@
+#!/bin/bash
+
+path=/vagrant/ops/scripts/provision/ubuntu
+
+$path/base www.bill-boyer.com dev
+$path/apache dev.bill-boyer.com
+$path/rails
+$path/php
+$path/mongodb
+$path/node
+
+$path/jenkins
+sudo -u jenkins $path/jenkins-user /vagrant/jobs
+
+cat > /etc/init/api.bill-boyer.com.conf <<EOF
+
+description "node.js server for api.bill-boyer.com"
+author      "kvz - http://kevin.vanzonneveld.net"
+
+# used to be: start on startup
+# until we found some mounts weren't ready yet while booting:
+start on started mountall
+stop on shutdown
+
+# Automatically Respawn:
+respawn
+respawn limit 99 5
+
+script
+    # Not sure why $HOME is needed, but we found that it is:
+    export HOME="/root"
+
+    exec /usr/local/bin/node /srv/node/api.bill-boyer.com/main.js >> /var/log/node.log 2>&1
+end script
+
+post-start script
+   # Optionally put a script here that will notifiy you node has (re)started
+   # /root/bin/hoptoad.sh "node.js has started!"
+end script
+
+EOF
+
+service api.bill-boyer.com start
+
+# for now we're relying on the package.json that's in the facts-db project
+cd /srv/node/api.bill-boyer.com
+cp /vagrant-mnt/facts-db/package.json .
+npm install

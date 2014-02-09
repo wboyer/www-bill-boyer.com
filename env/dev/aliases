@@ -1,0 +1,4 @@
+alias create='vagrant up --provider=vmware_fusion'
+alias destroy='vagrant destroy -f'
+alias bounce='vagrant reload'
+alias watch='vagrant ssh -c "sudo /vagrant/watch"'
