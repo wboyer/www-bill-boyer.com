@@ -1,0 +1,87 @@
+#!/bin/bash
+
+if [ $# != 1 ] ;
+then
+	echo "Usage: provision <env>"
+	exit 1
+fi
+
+env=$1
+
+path=/vagrant-mnt/ops/scripts/provision/ubuntu
+
+$path/base www.bill-boyer.com $env
+$path/apache
+$path/rails
+$path/php
+$path/mongodb
+$path/node
+$path/grunt
+
+mkdir /srv/www/aux
+mkdir /srv/www/dist
+
+cat > /etc/apache2/sites-available/default <<EOF
+<VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  ServerName www.bill-boyer.com
+
+  DocumentRoot /srv/www/docroot
+  <Directory />
+    Options FollowSymLinks
+    AllowOverride All
+  </Directory>
+
+  <Directory /srv/www/docroot/>
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride All
+    Order allow,deny
+    allow from all
+  </Directory>
+
+  Alias /js /srv/www/dist/js
+  Alias /css /srv/www/dist/css
+  Alias /aux /srv/www/aux
+
+  ProxyPass /api/ http://localhost:3000/
+
+  ErrorLog /var/log/apache2/error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/access.log combined
+</VirtualHost>
+EOF
+
+service apache2 restart
+
+mkdir /srv/node
+mkdir /srv/node/api.bill-boyer.com
+
+cat > /etc/init/api.bill-boyer.com.conf <<EOF
+
+description "node.js server for api.bill-boyer.com"
+author      "kvz - http://kevin.vanzonneveld.net"
+
+# used to be: start on startup
+# until we found some mounts weren't ready yet while booting:
+start on started mountall
+stop on shutdown
+
+# Automatically Respawn:
+respawn
+respawn limit 99 5
+
+script
+    # Not sure why $HOME is needed, but we found that it is:
+    export HOME="/root"
+
+    exec /usr/bin/node /srv/node/api.bill-boyer.com/main.js >> /var/log/node.log 2>&1
+end script
+
+post-start script
+   # Optionally put a script here that will notifiy you node has (re)started
+   # /root/bin/hoptoad.sh "node.js has started!"
+end script
+
+EOF
+
+service api.bill-boyer.com restart
