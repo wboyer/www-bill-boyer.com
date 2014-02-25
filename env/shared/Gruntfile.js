@@ -60,13 +60,19 @@ module.exports = function(grunt) {
 
 		shell: {
 			'copy-docroot': {
-				command: 'rsync -rt --exclude .git <%= grunt.option("src") %>/src/www/ <%= grunt.option("www-dest") %>/docroot'
+				command: 'rsync -rtf --delete --exclude .git <%= grunt.option("src") %>/src/www/ <%= grunt.option("www-dest") %>/docroot'
 			},
 			'copy-facts-js-test': {
-				command: 'rsync -rt --exclude .git <%= grunt.option("src") %>/facts-js <%= grunt.option("www-dest") %>/aux'
+				command: 'rsync -rtf --delete --exclude .git <%= grunt.option("src") %>/facts-js <%= grunt.option("www-dest") %>/aux'
 			},
 			'copy-node': {
-				command: 'rsync -rt --exclude .git <%= grunt.option("src") %>/src/node/ .'
+				command: 'rsync -rtf --delete --exclude .git <%= grunt.option("src") %>/src/node/ <%= grunt.option("node-dest") %>'
+			},
+			'deploy-www': {
+				command: 'rsync -rtf --delete <%= grunt.option("src") %>/dist/www/ <%= grunt.option("www-dest") %>'
+			},
+			'deploy-node': {
+				command: 'rsync -rtf --delete <%= grunt.option("src") %>/dist/node/ <%= grunt.option("node-dest") %>'
 			},
 			'bounce-node': {
 				command: 'service api.bill-boyer.com restart'
@@ -76,7 +82,7 @@ module.exports = function(grunt) {
 		watch: {
 			js: {
 				files: ['<%= jshint.files %>'],
-				tasks: ['shell:copy-node', 'build']
+				tasks: ['shell:copy-node', 'build', 'shell:bounce-node']
 			},
 			docroot: {
 				files: ['<%= grunt.option("src") %>/src/www/**'],
@@ -96,6 +102,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin', 'shell:bounce-node']);
-	grunt.registerTask('copy-build', ['shell:copy-docroot', 'shell:copy-facts-js-test', 'shell:copy-node', 'build']);
+	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-facts-js-test', 'shell:copy-node']);
+	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin']);
+
+	grunt.registerTask('copy-build', ['copy', 'build']);
+	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-node']);
+
+	grunt.registerTask('deploy', ['shell:deploy-www', 'shell:deploy-node']);
+	grunt.registerTask('deploy-bounce', ['copy', 'deploy', 'shell:bounce-node']);
 };

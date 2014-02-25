@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ $# != 2 ] ;
+then
+	echo "Usage: release <facts-db tag> <fact-js tag>"
+	exit 1
+fi
+
+curl -L https://github.com/wboyer/facts-db/archive/$1.tar.gz | gunzip | tar xf -
+mv facts-db-$1 facts-db
+
+curl -L https://github.com/wboyer/facts-js/archive/$2.tar.gz | gunzip | tar xf -
+mv facts-js-$2 facts-js
+
+mkdir -p build
+cd build
+
+cp ../env/shared/Gruntfile.js .
+cp ../facts-db/package.json .
+npm install
+
+grunt build --src=../src --www-dest=../dist/www --node-dest=../dist/node
+
+# test
+# publish to artifact repository
