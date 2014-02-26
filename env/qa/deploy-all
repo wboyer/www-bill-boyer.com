@@ -1,0 +1,9 @@
+#!/bin/bash --noprofile
+
+if [ ! -d "/vagrant-mnt/ops/scripts" ];
+then
+   echo "This script must only be run from the ops instance."
+   exit 1
+fi
+
+/vagrant-mnt/ops/scripts/infrastructure/aws/cycle-machines qa.bill-boyer.com qa-bill-boyer-com 1 2
