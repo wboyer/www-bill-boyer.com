@@ -60,19 +60,19 @@ module.exports = function(grunt) {
 
 		shell: {
 			'copy-docroot': {
-				command: 'rsync -rtf --delete --exclude .git <%= grunt.option("src") %>/src/www/ <%= grunt.option("www-dest") %>/docroot'
+				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/ <%= grunt.option("www-dest") %>/docroot'
 			},
 			'copy-facts-js-test': {
-				command: 'rsync -rtf --delete --exclude .git <%= grunt.option("src") %>/facts-js <%= grunt.option("www-dest") %>/aux'
+				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/facts-js <%= grunt.option("www-dest") %>/aux'
 			},
 			'copy-node': {
-				command: 'rsync -rtf --delete --exclude .git <%= grunt.option("src") %>/src/node/ <%= grunt.option("node-dest") %>'
+				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/node/ <%= grunt.option("node-dest") %>'
 			},
 			'deploy-www': {
-				command: 'rsync -rtf --delete <%= grunt.option("src") %>/dist/www/ <%= grunt.option("www-dest") %>'
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/www/ <%= grunt.option("www-dest") %>'
 			},
 			'deploy-node': {
-				command: 'rsync -rtf --delete <%= grunt.option("src") %>/dist/node/ <%= grunt.option("node-dest") %>'
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/node/ <%= grunt.option("node-dest") %>'
 			},
 			'bounce-node': {
 				command: 'service api.bill-boyer.com restart'
