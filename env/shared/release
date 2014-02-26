@@ -1,15 +1,15 @@
 #!/bin/bash
 
-if [ $# != 2 ] ;
+if [ $# -ne 2 ] ;
 then
 	echo "Usage: release <facts-db tag> <fact-js tag>"
 	exit 1
 fi
 
-curl -L https://github.com/wboyer/facts-db/archive/$1.tar.gz | gunzip | tar xf -
+curl -s -L https://github.com/wboyer/facts-db/archive/v$1.tar.gz | gunzip | tar xf -
 mv facts-db-$1 facts-db
 
-curl -L https://github.com/wboyer/facts-js/archive/$2.tar.gz | gunzip | tar xf -
+curl -s -L https://github.com/wboyer/facts-js/archive/v$2.tar.gz | gunzip | tar xf -
 mv facts-js-$2 facts-js
 
 mkdir -p build
