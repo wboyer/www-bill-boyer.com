@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
     aws.instance_type = "t1.micro"
 
     aws.tags = {
-      'Name' => 'dev-' + ENV['USER'] + '.bill-boyer.com'
+      'Name' => 'new-www.bill-boyer.com'
     }
 
     override.ssh.username = "root"
@@ -32,9 +32,9 @@ Vagrant.configure("2") do |config|
   config.vm.define "8"
   config.vm.define "9"
 
-  config.vm.synced_folder "../../src", "/vagrant-mnt/src"
+  config.vm.synced_folder "../../src, "/vagrant-mnt/src"
   config.vm.synced_folder "../shared", "/vagrant-mnt/env-shared"
-  config.vm.synced_folder "../../../ops.bill-boyer.com/", "/vagrant-mnt/ops"
+  config.vm.synced_folder "/vagrant-mnt/ops", "/vagrant-mnt/ops"
   config.vm.synced_folder "../../../facts-db/", "/vagrant-mnt/facts-db"
   config.vm.synced_folder "../../../facts-js/", "/vagrant-mnt/facts-js"
 end

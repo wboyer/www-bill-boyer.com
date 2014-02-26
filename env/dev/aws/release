@@ -1,3 +1,0 @@
-#!/bin/bash
-
-/vagrant-mnt/env-shared/release qa v0.1.0 v0.1.0
