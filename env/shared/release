@@ -19,7 +19,7 @@ cp ../env/shared/Gruntfile.js .
 cp ../facts-db/package.json .
 npm install
 
-grunt build --src=../src --www-dest=../dist/www --node-dest=../dist/node
+grunt build --src=.. --www-dest=../dist/www --node-dest=../dist/node
 
 # test
 # publish to artifact repository
