@@ -44,6 +44,15 @@ module.exports = function(grunt) {
 				files: {
 					'<%= grunt.option("www-dest") %>/dist/js/facts-js.min.js': '<%= grunt.option("www-dest") %>/dist/js/facts-js.js'
 				}
+			},
+
+			'node-main': {
+				options: {
+					banner: '/*! node-main <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+				},
+				files: {
+					'<%= grunt.option("node-dest") %>/dist/main.min.js': '<%= grunt.option("src") %>/node/main.js'
+				}
 			}
 		},
 
@@ -65,14 +74,14 @@ module.exports = function(grunt) {
 			'copy-facts-js-test': {
 				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/facts-js <%= grunt.option("www-dest") %>/aux'
 			},
-			'copy-node': {
-				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/node/ <%= grunt.option("node-dest") %>'
+			'deploy-docroot': {
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/src/www/ <%= grunt.option("www-dest") %>/docroot'
 			},
-			'deploy-www': {
-				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/www/ <%= grunt.option("www-dest") %>'
+			'deploy-www-dist': {
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/www/dist/ <%= grunt.option("www-dest") %>/dist'
 			},
 			'deploy-node': {
-				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/node/ <%= grunt.option("node-dest") %>'
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/node/dist/ <%= grunt.option("node-dest") %>/dist'
 			},
 			'bounce-node': {
 				command: 'service api.bill-boyer.com restart'
@@ -82,7 +91,7 @@ module.exports = function(grunt) {
 		watch: {
 			js: {
 				files: ['<%= jshint.files %>'],
-				tasks: ['shell:copy-node', 'build', 'shell:bounce-node']
+				tasks: ['build', 'shell:bounce-node']
 			},
 			docroot: {
 				files: ['<%= grunt.option("src") %>/src/www/**'],
@@ -102,12 +111,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-facts-js-test', 'shell:copy-node']);
+	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-facts-js-test']);
 	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin']);
 
 	grunt.registerTask('copy-build', ['copy', 'build']);
 	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-node']);
 
-	grunt.registerTask('deploy', ['shell:deploy-www', 'shell:deploy-node']);
+	grunt.registerTask('deploy', ['shell:deploy-www-dist', 'shell:deploy-docroot', 'shell:deploy-node']);
 	grunt.registerTask('deploy-bounce', ['copy', 'deploy', 'shell:bounce-node']);
 };

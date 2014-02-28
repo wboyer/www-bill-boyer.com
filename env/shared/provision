@@ -74,7 +74,7 @@ script
     # Not sure why $HOME is needed, but we found that it is:
     export HOME="/root"
 
-    exec /usr/bin/node /srv/node/api.bill-boyer.com/main.js >> /var/log/node.log 2>&1
+    exec /usr/bin/node /srv/node/api.bill-boyer.com/dist/main.min.js >> /var/log/node.log 2>&1
 end script
 
 post-start script
