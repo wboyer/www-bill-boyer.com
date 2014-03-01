@@ -77,6 +77,9 @@ module.exports = function(grunt) {
 			'deploy-docroot': {
 				command: 'rsync -rt --delete <%= grunt.option("src") %>/src/www/ <%= grunt.option("www-dest") %>/docroot'
 			},
+			'deploy-facts-js-test': {
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/src/facts-js <%= grunt.option("www-dest") %>/aux'
+			},
 			'deploy-www-dist': {
 				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/www/dist/ <%= grunt.option("www-dest") %>/dist'
 			},
@@ -117,6 +120,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('copy-build', ['copy', 'build']);
 	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-node']);
 
-	grunt.registerTask('deploy', ['shell:deploy-www-dist', 'shell:deploy-docroot', 'shell:deploy-node']);
+	grunt.registerTask('deploy', ['shell:deploy-www-dist', 'shell:deploy-docroot', 'shell:deploy-facts-js-test', 'shell:deploy-node']);
 	grunt.registerTask('deploy-bounce', ['copy', 'deploy', 'shell:bounce-node']);
 };
