@@ -51,7 +51,7 @@ module.exports = function(grunt) {
 					banner: '/*! node-main <%= grunt.template.today("dd-mm-yyyy") %> */\n'
 				},
 				files: {
-					'<%= grunt.option("node-dest") %>/dist/main.min.js': '<%= grunt.option("src") %>/node/main.js'
+					'<%= grunt.option("node-dest") %>/dist/main.min.js': '<%= grunt.option("src") %>/src/node/main.js'
 				}
 			}
 		},

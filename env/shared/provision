@@ -24,7 +24,8 @@ mkdir /srv/www/dist
 cat > /etc/apache2/sites-available/default <<EOF
 <VirtualHost *:80>
   ServerAdmin webmaster@localhost
-  ServerName www.bill-boyer.com
+  ServerName *.bill-boyer.com
+  ServerAlias *.compute.amazonaws.com
 
   DocumentRoot /srv/www/docroot
   <Directory />
@@ -48,6 +49,12 @@ cat > /etc/apache2/sites-available/default <<EOF
   ErrorLog /var/log/apache2/error.log
   LogLevel warn
   CustomLog /var/log/apache2/access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+  ServerName bill-boyer.com
+  ServerAlias william-boyer.com *.william-boyer.com
+  Redirect permanent / http://www.bill-boyer.com/
 </VirtualHost>
 EOF
 
