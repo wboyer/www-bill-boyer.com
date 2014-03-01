@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "../shared", "/vagrant-mnt/env-shared"
   config.vm.synced_folder "/vagrant-mnt/ops", "/vagrant-mnt/ops"
   config.vm.synced_folder "../../facts-db/", "/vagrant-mnt/facts-db"
+  config.vm.synced_folder "../../facts-js/", "/vagrant-mnt/facts-js"
 
   config.vm.define "1", primary: true
   config.vm.define "2"

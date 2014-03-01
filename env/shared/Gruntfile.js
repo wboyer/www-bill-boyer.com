@@ -78,7 +78,7 @@ module.exports = function(grunt) {
 				command: 'rsync -rt --delete <%= grunt.option("src") %>/src/www/ <%= grunt.option("www-dest") %>/docroot'
 			},
 			'deploy-facts-js-test': {
-				command: 'rsync -rt --delete <%= grunt.option("src") %>/src/facts-js <%= grunt.option("www-dest") %>/aux'
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/facts-js <%= grunt.option("www-dest") %>/aux'
 			},
 			'deploy-www-dist': {
 				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/www/dist/ <%= grunt.option("www-dest") %>/dist'
