@@ -92,3 +92,6 @@ end script
 EOF
 
 service api.bill-boyer.com restart
+
+cd /vagrant-mnt/facts-db/test/
+./build-facts-collection

@@ -1,4 +1,4 @@
-var facts = require('./dist/facts-db.min');
+var facts = require('./facts-db.min');
 
 var express = require('express');
 var app = express();
