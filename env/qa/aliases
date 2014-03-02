@@ -1,5 +1,0 @@
-alias create='vagrant up 1 --provider=aws'
-alias destroy='vagrant destroy -f 1'
-alias stop='vagrant halt'
-alias bounce='vagrant reload 1'
-alias deploy='vagrant ssh -c "/vagrant/deploy" 1'

@@ -1,0 +1,7 @@
+#!/bin/bash --noprofile
+
+if [ ! -d "/vagrant-mnt/ops/scripts" ];
+then
+   echo "This script must only be run from the ops instance."
+   exit 1
+fi
