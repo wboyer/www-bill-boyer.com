@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
     aws.instance_type = "t1.micro"
 
     aws.tags = {
-      'Name' => 'new-www.bill-boyer.com'
+      'Name' => 'www.bill-boyer.com'
     }
 
     override.ssh.username = "root"
