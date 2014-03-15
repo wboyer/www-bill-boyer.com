@@ -86,6 +86,9 @@ module.exports = function(grunt) {
 			'deploy-node': {
 				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/node/dist/ <%= grunt.option("node-dest") %>/dist'
 			},
+			'bounce-apache': {
+				command: 'service apache2 restart'
+			},
 			'bounce-node': {
 				command: 'service api.bill-boyer.com restart'
 			}
@@ -118,8 +121,8 @@ module.exports = function(grunt) {
 	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin']);
 
 	grunt.registerTask('copy-build', ['copy', 'build']);
-	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-node']);
+	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-apache', 'shell:bounce-node']);
 
 	grunt.registerTask('deploy', ['shell:deploy-www-dist', 'shell:deploy-docroot', 'shell:deploy-facts-js-test', 'shell:deploy-node']);
-	grunt.registerTask('deploy-bounce', ['copy', 'deploy', 'shell:bounce-node']);
+	grunt.registerTask('deploy-bounce', ['copy', 'deploy', 'shell:bounce-apache', 'shell:bounce-node']);
 };
