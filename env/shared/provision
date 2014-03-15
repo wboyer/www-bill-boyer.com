@@ -12,10 +12,12 @@ path=/vagrant-mnt/ops/scripts/provision/ubuntu
 
 $path/base www.bill-boyer.com $env
 $path/apache
-$path/rails
+$path/node
+$path/ruby
+$path/sqlite
+$path/rails www.bill-boyer.com
 $path/php
 $path/mongodb
-$path/node
 $path/grunt
 
 mkdir /srv/www/aux
