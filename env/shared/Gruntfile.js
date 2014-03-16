@@ -95,6 +95,10 @@ module.exports = function(grunt) {
 		},
 
 		watch: {
+			css: {
+				files: ['<%= cssmin.www.src %>'],
+				tasks: ['cssmin']
+			},
 			js: {
 				files: ['<%= jshint.files %>'],
 				tasks: ['build', 'shell:bounce-node']
