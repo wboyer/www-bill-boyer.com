@@ -5,9 +5,21 @@ module.exports = function(grunt) {
 		cssmin: {
 			'www': {
 				src: ['<%= grunt.option("src") %>/src/www/css/*.css'],
-				dest: '<%= grunt.option("www-dest") %>/dist/css/main.css'
+				dest: '<%= grunt.option("www-dest") %>/dist/css/style.css'
 			}
 		},
+
+        compass: {
+			'defaut': {
+				options: {
+					sassDir: '<%= grunt.option("src") %>/src/www/css/sass',
+					cssDir: '<%= grunt.option("www-dest") %>/dist/css',
+					imagesDir: '<%= grunt.option("src") %>/src/www/img',
+					outputStyle: 'compressed',
+					noLineComments: true
+				}
+			}
+        },
 
 		concat: {
 			'facts-db': {
@@ -119,10 +131,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-facts-js-test']);
-	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin']);
+	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin', 'compass']);
 
 	grunt.registerTask('copy-build', ['copy', 'build']);
 	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-apache', 'shell:bounce-node']);

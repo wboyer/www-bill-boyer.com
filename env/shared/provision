@@ -20,6 +20,7 @@ $path/sqlite
 $path/rails www.bill-boyer.com
 $path/mongodb
 $path/grunt
+$path/compass
 
 mkdir /srv/www/aux
 mkdir /srv/www/dist
