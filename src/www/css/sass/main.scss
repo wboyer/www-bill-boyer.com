@@ -1,9 +1,6 @@
 @charset "UTF-8";
 
 body {font-family: Arial, sans-serif}
-h1 {text-transform:lowercase}
-h2 {text-transform:lowercase}
-.navbar-brand {font-size: 2em; text-transform:lowercase}
-.navbar-nav {text-transform:lowercase}
-.panel-heading {text-transform:lowercase}
+h1, h2, .panel-heading, .navbar-nav, .navbar-brand {text-transform:lowercase}
+.navbar-brand {font-size: 2em}
 .panel-body {font-size: 0.9em}
