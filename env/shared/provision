@@ -12,11 +12,12 @@ path=/vagrant-mnt/ops/scripts/provision/ubuntu
 
 $path/base www.bill-boyer.com $env
 $path/apache
+$path/php
+$path/wordpress
 $path/node
 $path/ruby
 $path/sqlite
 $path/rails www.bill-boyer.com
-$path/php
 $path/mongodb
 $path/grunt
 
@@ -45,8 +46,13 @@ cat > /etc/apache2/sites-available/default <<EOF
   Alias /js /srv/www/dist/js
   Alias /css /srv/www/dist/css
   Alias /aux /srv/www/aux
+  Alias /blog /srv/www/wordpress
 
-  ProxyPass /api/ http://localhost:3000/
+  ProxyPass /api http://localhost:3000
+
+  ProxyPass /test/rails http://localhost:81
+  ProxyPass /rails http://localhost:81/rails
+  ProxyPass /demos http://localhost:81/demos
 
   ErrorLog /var/log/apache2/error.log
   LogLevel warn
