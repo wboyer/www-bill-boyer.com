@@ -1,8 +1,10 @@
 @charset "UTF-8";
 
 body {font-family: Arial, sans-serif; background-color: rgb(245,245,255)}
-h1 {color: rgb(2,35,198)}
-h2 {color: rgb(2,35,198)}
+h1 {color: rgb(2,35,198); text-transform:lowercase}
+h2 {color: rgb(2,35,198); text-transform:lowercase}
 a {color: #cca300}
-.navbar-default .navbar-brand {font-size: 2em; color: rgb(2,35,198)}
+.navbar-brand {font-size: 2em; text-transform:lowercase}
+.navbar-nav {text-transform:lowercase}
+.panel-heading {text-transform:lowercase}
 .panel-body {font-size: 0.9em}
