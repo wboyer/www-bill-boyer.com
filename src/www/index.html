@@ -17,9 +17,8 @@
 <meta property="og:url" content="http://www.bill-boyer.com" />
 <meta property="og:image" content="http://www.bill-boyer.com/img/boyer.jpg" />
 
-<link href="/css/style.css" rel="stylesheet" type="text/css">
-<link href="/css/main.css" rel="stylesheet" type="text/css">
-
+<script src="/js/site.min.js"></script>
+<link href="/css/override.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -40,9 +39,32 @@
 
 <div class="collapse navbar-collapse" id="navbar-collapse">
 <ul class="nav navbar-nav navbar-right">
-<li><a href="#">About Me</a></li>
-<li><a href="#">About This Site</a></li>
-<li><a href="#">Demos</a></li>
+<li><a href="#" onclick="return false;">About Me</a></li>
+<li><a href="#" onclick="return false;">About This Site</a></li>
+<li><a href="#" onclick="return false;">Demos</a></li>
+<li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Themes <span class="caret"></span>
+    </a>
+	<ul id="themes-menu" class="dropdown-menu">
+    	<li data-theme="default"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 1</a></li>
+        <li data-theme="amelia"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 2</a></li>
+        <li data-theme="cerulean"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 3</a></li>
+        <li data-theme="cosmo"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 4</a></li>
+        <li data-theme="cyborg"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 5</a></li>
+        <li data-theme="darkly"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 6</a></li>
+        <li data-theme="flatly"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 7</a></li>
+        <li data-theme="journal"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 8</a></li>
+        <li data-theme="lumen"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 9</a></li>
+        <li data-theme="readable"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 10</a></li>
+        <li data-theme="simplex"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 11</a></li>
+        <li data-theme="slate"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 12</a></li>
+        <li data-theme="spacelab"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 13</a></li>
+        <li data-theme="superhero"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 14</a></li>
+        <li data-theme="united"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 15</a></li>
+        <li data-theme="yeti"><a href="#" onclick="Site.Util.setTheme(this.parentNode); return false;">Theme 16</a></li>
+	</ul>
+</li>
 </ul>
 </div>
 
@@ -50,7 +72,7 @@
 </div>
 
 <div class="row">
-<div class="col-lg-10 col-lg-push-2">
+<div class="col-lg-9 col-lg-push-3">
 
 <h1>Welcome</h1>
 
@@ -71,7 +93,7 @@
 
 </div>
 
-<div class="col-lg-2 col-lg-pull-10">
+<div class="col-lg-3 col-lg-pull-9 left-col">
       
 <div class="panel panel-default">
 <div class="panel-heading">About This Page</div>
@@ -95,8 +117,25 @@ This panel will appear on every page, briefly describing how the page has been i
 </div>
 </div>
 
+<div class="row">
+<div class="panel panel-default">
+<div class="panel-body">
+<footer>
+<h5>Credits</h5>
+<p>Built with <a href="http://getbootstrap.com/">Bootstrap</a>. CSS themes from <a href="http://bootswatch.com/">Bootswatch</a>, by <a href="http://thomaspark.me">Thomas Park</a>.</p>
+</footer>
+</div>
+</div>
+</div>
+
+</div>
+
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+
+<script>
+	Site.Util.highlightThemeMenu();
+</script>
 
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -112,7 +151,6 @@ $("#page-info").popover({placement: "top"});
 });
 </script>
 
-</div>
 </body>
 </html>
 

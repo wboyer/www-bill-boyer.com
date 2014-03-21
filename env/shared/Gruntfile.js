@@ -3,14 +3,14 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 
 		cssmin: {
-			'www': {
+			www: {
 				src: ['<%= grunt.option("src") %>/src/www/css/*.css'],
 				dest: '<%= grunt.option("www-dest") %>/dist/css/style.css'
 			}
 		},
 
         compass: {
-			'defaut': {
+			default: {
 				options: {
 					sassDir: '<%= grunt.option("src") %>/src/www/css/sass',
 					cssDir: '<%= grunt.option("www-dest") %>/dist/css',
@@ -36,6 +36,14 @@ module.exports = function(grunt) {
 				},
 				src: ['<%= grunt.option("src") %>/facts-js/src/js/**/*.js'],
 				dest: '<%= grunt.option("www-dest") %>/dist/js/facts-js.js'
+			},
+
+			'site-js': {
+				options: {
+					separator: ';'
+				},
+				src: ['<%= grunt.option("src") %>/src/www/js/**/*.js'],
+				dest: '<%= grunt.option("www-dest") %>/dist/js/site.js'
 			}
 		},
 
@@ -58,6 +66,15 @@ module.exports = function(grunt) {
 				}
 			},
 
+			'site-js': {
+				options: {
+					banner: '/*! site-js <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+				},
+				files: {
+					'<%= grunt.option("www-dest") %>/dist/js/site.min.js': '<%= grunt.option("www-dest") %>/dist/js/site.js'
+				}
+			},
+
 			'node-main': {
 				options: {
 					banner: '/*! node-main <%= grunt.template.today("dd-mm-yyyy") %> */\n'
@@ -69,7 +86,7 @@ module.exports = function(grunt) {
 		},
 
 		jshint: {
-			files: ['Gruntfile.js', '<%= grunt.option("src") %>/src/www/js/**/*.js', '<%= grunt.option("src") %>/src/node/**/*.js', '<%= grunt.option("src") %>/facts-db/**/*.js', '<%= grunt.option("src") %>/facts-js/**/*.js'],
+			files: ['Gruntfile.js', '<%= grunt.option("src") %>/src/www/js/**', '<%= grunt.option("src") %>/src/node/**/*.js', '<%= grunt.option("src") %>/facts-db/**/*.js', '<%= grunt.option("src") %>/facts-js/**/*.js'],
 			options: {
 				globals: {
 					console: true,
@@ -82,6 +99,15 @@ module.exports = function(grunt) {
 		shell: {
 			'copy-docroot': {
 				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/ <%= grunt.option("www-dest") %>/docroot'
+			},
+			'copy-themes': {
+				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/css/themes/ <%= grunt.option("www-dest") %>/dist/css/themes'
+			},
+			'copy-fonts': {
+				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/fonts/ <%= grunt.option("www-dest") %>/dist/css/themes/fonts'
+			},
+			'copy-rails': {
+				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/rails/ <%= grunt.option("rails-dest") %>/www.bill-boyer.com'
 			},
 			'copy-facts-js-test': {
 				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/facts-js <%= grunt.option("www-dest") %>/aux'
@@ -101,6 +127,9 @@ module.exports = function(grunt) {
 			'bounce-apache': {
 				command: 'service apache2 restart'
 			},
+			'bounce-passenger': {
+				command: 'cd <%= grunt.option("rails-dest") %>/www.bill-boyer.com; passenger stop --port 81; passenger start --daemonize --port 81'
+			},
 			'bounce-node': {
 				command: 'service api.bill-boyer.com restart'
 			}
@@ -111,13 +140,25 @@ module.exports = function(grunt) {
 				files: ['<%= cssmin.www.src %>'],
 				tasks: ['cssmin']
 			},
-			js: {
-				files: ['<%= jshint.files %>'],
+			compass: {
+				files: ['<%= grunt.option("src") %>/src/www/css/sass/**'],
+				tasks: ['compass']
+			},
+			'js-1': {
+				files: ['<%= grunt.option("src") %>/src/www/js/**/*.js', '<%= grunt.option("src") %>/src/node/**/*.js'],
+				tasks: ['build', 'shell:bounce-node']
+			},
+			'js-2': {
+				files: ['<%= grunt.option("src") %>/facts-db/**/*.js', '<%= grunt.option("src") %>/facts-js/**/*.js'],
 				tasks: ['build', 'shell:bounce-node']
 			},
 			docroot: {
 				files: ['<%= grunt.option("src") %>/src/www/**'],
 				tasks: ['shell:copy-docroot']
+			},
+			rails: {
+				files: ['<%= grunt.option("src") %>/src/rails/**'],
+				tasks: ['shell:copy-rails', 'shell:bounce-passenger']
 			},
 			'facts-js-test': {
 				files: ['<%= grunt.option("src") %>/facts-js/**'],
@@ -134,12 +175,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-facts-js-test']);
+	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-themes', 'shell:copy-fonts', 'shell:copy-rails', 'shell:copy-facts-js-test']);
 	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin', 'compass']);
 
 	grunt.registerTask('copy-build', ['copy', 'build']);
-	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-apache', 'shell:bounce-node']);
+	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-apache', 'shell:bounce-passenger', 'shell:bounce-node']);
 
 	grunt.registerTask('deploy', ['shell:deploy-www-dist', 'shell:deploy-docroot', 'shell:deploy-facts-js-test', 'shell:deploy-node']);
 	grunt.registerTask('deploy-bounce', ['copy', 'deploy', 'shell:bounce-apache', 'shell:bounce-node']);
 };
+
