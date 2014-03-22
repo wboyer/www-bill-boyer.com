@@ -100,10 +100,10 @@ module.exports = function(grunt) {
 			'copy-docroot': {
 				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/ <%= grunt.option("www-dest") %>/docroot'
 			},
-			'copy-themes': {
+			'build-themes': {
 				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/css/themes/ <%= grunt.option("www-dest") %>/dist/css/themes'
 			},
-			'copy-fonts': {
+			'build-fonts': {
 				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/fonts/ <%= grunt.option("www-dest") %>/dist/css/themes/fonts'
 			},
 			'copy-rails': {
@@ -175,8 +175,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-themes', 'shell:copy-fonts', 'shell:copy-rails', 'shell:copy-facts-js-test']);
-	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin', 'compass']);
+	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-rails', 'shell:copy-facts-js-test']);
+	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin', 'compass', 'shell:build-themes', 'shell:build-fonts']);
 
 	grunt.registerTask('copy-build', ['copy', 'build']);
 	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-apache', 'shell:bounce-passenger', 'shell:bounce-node']);
