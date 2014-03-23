@@ -1,0 +1,65 @@
+</div>
+
+<div class="col-lg-3 col-lg-pull-9 left-col">
+      
+<div class="panel panel-default">
+<div class="panel-heading">About This Page</div>
+<div class="panel-body">
+This panel will appear on every page, briefly describing how the page has been implemented.  The "more..." button will open an overlay with more detailed information. 
+<br/>
+<br/>
+<button id="page-info" type="button" class="btn btn-default" style="float: right" rel="popover" data-content="coming soon"><span class="glyphicon glyphicon-info-sign"></span> more...</button>
+</div>  
+</div>
+
+<div class="panel panel-default">
+<div class="panel-heading">Share</div>
+<div class="panel-body">
+<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share"></span></button>
+<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share"></span></button>
+<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share"></span></button>
+</div>  
+</div>
+
+</div>
+</div>
+
+<div class="row">
+<div class="panel panel-default">
+<div class="panel-body">
+<footer>
+<h5>Credits</h5>
+<p>Built with <a href="http://getbootstrap.com/">Bootstrap</a>. CSS themes from <a href="http://bootswatch.com/">Bootswatch</a>, by <a href="http://thomaspark.me">Thomas Park</a>.</p>
+</footer>
+</div>
+</div>
+</div>
+
+</div>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.js"></script>
+<script src="/js/site.min.js"></script>
+
+<script>
+Site.Menu.createThemeMenu();
+Site.Menu.highlightThemeMenu();
+</script>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-45564746-1', 'bill-boyer.com');
+ga('send', 'pageview');
+  
+$(function (){
+$("#page-info").popover({placement: "top"});
+});
+</script>
+</body>
+</html>
+

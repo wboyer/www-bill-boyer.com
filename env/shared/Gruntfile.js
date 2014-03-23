@@ -38,11 +38,19 @@ module.exports = function(grunt) {
 				dest: '<%= grunt.option("www-dest") %>/dist/js/facts-js.js'
 			},
 
+			'head-js': {
+				options: {
+					separator: ';'
+				},
+				src: ['<%= grunt.option("src") %>/src/www/js/head/**/*.js'],
+				dest: '<%= grunt.option("www-dest") %>/dist/js/head.js'
+			},
+
 			'site-js': {
 				options: {
 					separator: ';'
 				},
-				src: ['<%= grunt.option("src") %>/src/www/js/**/*.js'],
+				src: ['<%= grunt.option("src") %>/src/www/js/*.js'],
 				dest: '<%= grunt.option("www-dest") %>/dist/js/site.js'
 			}
 		},
@@ -63,6 +71,15 @@ module.exports = function(grunt) {
 				},
 				files: {
 					'<%= grunt.option("www-dest") %>/dist/js/facts-js.min.js': '<%= grunt.option("www-dest") %>/dist/js/facts-js.js'
+				}
+			},
+
+			'head-js': {
+				options: {
+					banner: '/*! head-js <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+				},
+				files: {
+					'<%= grunt.option("www-dest") %>/dist/js/head.min.js': '<%= grunt.option("www-dest") %>/dist/js/head.js'
 				}
 			},
 
@@ -107,7 +124,7 @@ module.exports = function(grunt) {
 				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/fonts/ <%= grunt.option("www-dest") %>/dist/css/themes/fonts'
 			},
 			'copy-rails': {
-				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/rails/ <%= grunt.option("rails-dest") %>/www.bill-boyer.com'
+				command: 'rsync -rt --delete --exclude .git --exclude tmp --exclude log <%= grunt.option("src") %>/src/rails/ <%= grunt.option("rails-dest") %>/www.bill-boyer.com'
 			},
 			'copy-facts-js-test': {
 				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/facts-js <%= grunt.option("www-dest") %>/aux'

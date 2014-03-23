@@ -53,4 +53,9 @@ WwwBillBoyerCom::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  get '/rails' => "rails/welcome#index"
+  root "welcome#index"
+  resources :demos
+  resources :themes
 end

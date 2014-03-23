@@ -1,89 +1,45 @@
 var Site = Site || {};
 
-Site.Util = {
-	getHashParam: function(name) {
-		var hash = window.location.hash;
-		var match = name + "=";
-		var index = hash.indexOf(match);
-		if (index >= 0) {
-			hash = hash.substring(index + match.length);
-			index = hash.indexOf(";");
-			if (index >= 0)
-				hash = hash.substring(0, index);
-			return hash;
-		}
-	},
+Site.Menu = {
+	createThemeMenu: function() {
+		var nav = document.getElementById("nav-ul");
 
-	removeHashParam: function(name) {
-		var value = this.getHashParam(name);
-		if (value) {
-			var hash = window.location.hash.replace(name + "=" + value, "");
-			if (hash.indexOf("&") === 0)
-				hash = hash.substring(1);
-			else
-				if (hash.indexOf("&") === (hash.length - 1))
-					hash = hash.substring(0, hash.length - 1);
-			if (hash == "#")
-				history.pushState('', document.title, window.location.pathname);
-			else
-				window.location.hash = hash;
-		}
-	},
+		var li = document.createElement("li");
+		li.className += "dropdown";
+		nav.appendChild(li);
 
-	setHashParam: function(name, value) {
-		this.removeHashParam(name);
-		window.location.hash += name + "=" + value;
-	},
+		var a = document.createElement("a");
+		a.setAttribute("data-toggle", "dropdown");
+		a.setAttribute("href", "#");
+		a.className += "dropdown-toggle";
+		li.appendChild(a);
 
-	getCookie: function(name) {
-		var cookie = document.cookie;
-		var match = name + "=";
-		var index = cookie.indexOf(match);
-		if (index >= 0) {
-			cookie = cookie.substring(index + match.length);
-			index = cookie.indexOf(";");
-			return cookie.substring(0, index);
-		}
-	},
+		var text = document.createTextNode("Themes ");
+		a.appendChild(text);
 
-	setCookie: function(name, value) {
-		document.cookie = name + "=" + value;
-	},
+		var span = document.createElement("span");
+		span.className += "caret";
+		a.appendChild(span);
 
-	setTheme: function(item) {
-		var name;
-		if (item) {
-			name = item.getAttribute("data-theme");
-			this.setCookie("theme", name);
-			this.setHashParam("theme", name);
-			window.location.reload();
-			return;
-		}
-		else {
-			name = this.getCookie("theme");
-			if (name)
-				this.removeHashParam("theme");
-			else {
-				name = this.getHashParam("theme");
-				if (name)
-					this.removeHashParam("theme");
-				else
-					name = "default";
-			}
-		}
+		var ul = document.createElement("ul");
+		ul.setAttribute("id", "themes-menu");
+		ul.setAttribute("ng-app", "themesApp");
+		ul.className += "dropdown-menu";
+		li.appendChild(ul);
 
-		this.currentTheme = name;
-		var href = "/css/themes/" + this.currentTheme + "/bootstrap.css";
+		li = document.createElement("li");
+		li.setAttribute("data-theme", "{{theme}}");
+		li.setAttribute("ng-repeat", "theme in ['default', 'amelia', 'cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'readable', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti']");
+		li.className += "dropdown";
+		ul.appendChild(li);
 
-		var link = document.getElementById("theme");
-		if (link)
-			document.removeElement(link);
+		a = document.createElement("a");
+		a.setAttribute("onclick", "Site.Util.setTheme(this.parentNode); return false;");
+		a.setAttribute("href", "#");
+		li.appendChild(a);
 
-		link = document.createElement("link");
-		link.setAttribute("type", "text/css");
-		link.setAttribute("rel", "stylesheet");
-		link.setAttribute("href", href);
-		document.getElementsByTagName("head")[0].appendChild(link);
+		text = document.createTextNode("theme {{$index + 1}}");
+		a.appendChild(text);
 	},
 
 	highlightThemeMenu: function() {
@@ -98,5 +54,4 @@ Site.Util = {
 	}
 };
 
-Site.Util.setTheme();
-
+var themesApp = angular.module('themesApp', []);

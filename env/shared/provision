@@ -49,11 +49,15 @@ cat > /etc/apache2/sites-available/default <<EOF
   Alias /aux /srv/www/aux
   Alias /blog /srv/www/wordpress
 
+  ProxyPass /js !
+  ProxyPass /css !
+  ProxyPass /aux !
+  ProxyPass /blog !
+
   ProxyPass /api http://localhost:3000
 
-  ProxyPass /test/rails http://localhost:81
-  ProxyPass /rails http://localhost:81/rails
-  ProxyPass /demos http://localhost:81/demos
+  ProxyPass /test/rails http://localhost:81/rails
+  ProxyPass / http://localhost:81/
 
   ErrorLog /var/log/apache2/error.log
   LogLevel warn
