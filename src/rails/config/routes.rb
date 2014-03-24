@@ -57,5 +57,4 @@ WwwBillBoyerCom::Application.routes.draw do
   get '/rails' => "rails/welcome#index"
   root "welcome#index"
   resources :demos
-  resources :themes
 end

@@ -1,0 +1,47 @@
+<%= form_for :demo, url: demo_path(@demo), method: :patch do |f| %>
+
+  <% if @demo and @demo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@demo.errors.count, "error") %> prohibited this demo from being saved:</h2>
+      <ul>
+        <% @demo.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :url %><br>
+    <%= :url %>
+  </p>
+ 
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= f.label :desc %><br>
+    <%= f.text_area :desc %>
+  </p>
+ 
+  <p>
+    <%= f.label :img %><br>
+    <%= f.text_field :img %>
+  </p>
+ 
+  <p>
+    <%= f.label :src %><br>
+    <%= f.text_field :src %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+
+  <p>
+    <%= link_to 'Destroy', demo_path(@demo), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </p>
+<% end %>
+
