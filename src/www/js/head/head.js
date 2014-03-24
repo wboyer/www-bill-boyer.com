@@ -47,7 +47,7 @@ Site.Util = {
 	},
 
 	setCookie: function(name, value) {
-		document.cookie = name + "=" + value;
+		document.cookie = name + "=" + value + ";path=/";
 	},
 
 	setTheme: function(item) {
