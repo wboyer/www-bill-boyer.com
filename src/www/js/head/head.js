@@ -72,8 +72,8 @@ Site.Util = {
 			}
 		}
 
-		this.currentTheme = name;
-		var href = "/css/themes/" + this.currentTheme + "/bootstrap.css";
+		window.currentTheme = name;
+		var href = "/css/themes/" + name + "/bootstrap.css";
 
 		var link = document.getElementById("theme");
 		if (link)
@@ -84,43 +84,6 @@ Site.Util = {
 			link.setAttribute("rel", "stylesheet");
 			link.setAttribute("href", href);
 			document.getElementsByTagName("head")[0].appendChild(link);
-		}
-	},
-
-	createThemeMenu: function() {
-		var nav = document.getElementById("nav-ul");
-
-		var li = document.createElement("li");
-		li.className += "dropdown";
-		nav.appendChild(li);
-
-		var a = document.createElement("a");
-		a.setAttribute("data-toggle", "dropdown");
-		a.setAttribute("href", "#");
-		a.className += "dropdown-toggle";
-		li.appendChild(a);
-
-		var text = document.createTextNode("Themes ");
-		a.appendChild(text);
-
-		var span = document.createElement("span");
-		span.className += "caret";
-		a.appendChild(span);
-
-		var ul = document.createElement("ul");
-		ul.setAttribute("id", "themes-menu");
-		ul.className += "dropdown-menu";
-		li.appendChild(ul);
-	},
-
-	highlightThemeMenu: function() {
-		var ul = document.getElementById("themes-menu");
-		var items = ul.getElementsByTagName("li");
-
-		for (var i = 0; i < items.length; i++) {
-			var item = items[i];
-			if (this.currentTheme == item.getAttribute("data-theme"))
-				item.className += " active";
 		}
 	}
 };
