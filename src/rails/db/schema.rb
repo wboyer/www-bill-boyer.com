@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324174123) do
+ActiveRecord::Schema.define(version: 20140327174309) do
 
   create_table "demos", id: false, force: true do |t|
     t.string   "url"
     t.string   "title"
-    t.text     "desc"
+    t.text     "short_desc"
     t.string   "img"
-    t.string   "src"
+    t.string   "script"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "long_desc"
   end
 
   add_index "demos", ["url"], name: "index_demos_on_url", unique: true

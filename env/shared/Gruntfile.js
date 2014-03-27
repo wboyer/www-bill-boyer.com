@@ -10,11 +10,18 @@ module.exports = function(grunt) {
 		},
 
         compass: {
-			default: {
+			facts: {
+				options: {
+					sassDir: '<%= grunt.option("src") %>/facts-js/src/css',
+					cssDir: '<%= grunt.option("www-dest") %>/dist/css',
+					outputStyle: 'compressed',
+					noLineComments: true
+				}
+			},
+			site: {
 				options: {
 					sassDir: '<%= grunt.option("src") %>/src/www/css/sass',
 					cssDir: '<%= grunt.option("www-dest") %>/dist/css',
-					imagesDir: '<%= grunt.option("src") %>/src/www/img',
 					outputStyle: 'compressed',
 					noLineComments: true
 				}
@@ -158,7 +165,7 @@ module.exports = function(grunt) {
 				tasks: ['cssmin']
 			},
 			compass: {
-				files: ['<%= grunt.option("src") %>/src/www/css/sass/**'],
+				files: ['<%= grunt.option("src") %>/src/www/css/sass/**','<%= grunt.option("src") %>/facts-js/src/css/**'],
 				tasks: ['compass']
 			},
 			'js-1': {

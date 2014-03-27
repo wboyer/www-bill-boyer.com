@@ -1,19 +1,15 @@
 <h1>Demos</h1>
 
-<table width="100%">
-  <tr>
-    <th>Title</th>
-    <th>Desc</th>
-    <th>Img</th>
-    <th>Src</th>
-  </tr>
- 
+<p>Cool demos of various tools and ideas.</p>
+
+<table class="table table-striped">
   <% @demos.each do |demo| %>
     <tr>
-      <td><%= demo.title %></td>
-      <td><%= demo.desc %></td>
-      <td><%= demo.img %></td>
-      <td><%= demo.src %></td>
+      <td class="demo-thumbnail"><%= link_to image_tag(demo.img, :class => "demo-thumbnail"), demo_path(demo) %></td>
+      <td>
+        <h2><%= link_to demo.title, demo_path(demo) %></h2>
+        <p><%= demo.short_desc %></p>
+      </td>
     </tr>
   <% end %>
 </table>

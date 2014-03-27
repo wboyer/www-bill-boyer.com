@@ -6,7 +6,7 @@ Site.Menu = {
 
 		var li = document.createElement("li");
 		li.className += " dropdown";
-		li.setAttribute("data-no-turbolink");
+		li.setAttribute("data-no-turbolink", "true");
 		nav.appendChild(li);
 
 		var a = document.createElement("a");
@@ -56,3 +56,5 @@ themesApp.directive("li", function () {
 		}
 	};
 });
+
+jQuery.ajaxSetup({ cache: true });

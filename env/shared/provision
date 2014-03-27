@@ -53,6 +53,8 @@ cat > /etc/apache2/sites-available/default <<EOF
   ProxyPass /css !
   ProxyPass /aux !
   ProxyPass /blog !
+  ProxyPass /test/php !
+  ProxyPass /test/html !
 
   ProxyPass /api http://localhost:3000
 
