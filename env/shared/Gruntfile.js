@@ -131,7 +131,7 @@ module.exports = function(grunt) {
 				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/fonts/ <%= grunt.option("www-dest") %>/dist/css/themes/fonts'
 			},
 			'copy-rails': {
-				command: 'rsync -rt --delete --exclude .git --exclude tmp --exclude log <%= grunt.option("src") %>/src/rails/ <%= grunt.option("rails-dest") %>/www.bill-boyer.com'
+				command: 'rsync -rt --delete --exclude .git --exclude tmp --exclude log <%= grunt.option("src") %>/src/rails/ <%= grunt.option("rails-dest") %>/www.bill-boyer.com; cd <%= grunt.option("rails-dest") %>/www.bill-boyer.com; RAILS_ENV=production bundle exec rake assets:precompile'
 			},
 			'copy-facts-js-test': {
 				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/facts-js <%= grunt.option("www-dest") %>/aux'
@@ -152,7 +152,7 @@ module.exports = function(grunt) {
 				command: 'service apache2 restart'
 			},
 			'bounce-passenger': {
-				command: 'cd <%= grunt.option("rails-dest") %>/www.bill-boyer.com; passenger stop --port 81; passenger start --daemonize --port 81'
+				command: 'cd <%= grunt.option("rails-dest") %>/www.bill-boyer.com; passenger stop --port 81; RAILS_ENV=<%= grunt.option("rails-env") %> passenger start --daemonize --port 81'
 			},
 			'bounce-node': {
 				command: 'service api.bill-boyer.com restart'
