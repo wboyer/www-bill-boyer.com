@@ -1,3 +1,5 @@
+<% content_for :title do %>New Demo<% end %>
+
 <%= form_for :demo, url: demos_path do |f| %>
 
   <% if @demo and @demo.errors.any? %>

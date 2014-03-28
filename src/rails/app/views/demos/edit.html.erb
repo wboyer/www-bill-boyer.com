@@ -1,3 +1,5 @@
+<% content_for :title do %><%= @demo.title %> | Edit Demo<% end %>
+
 <%= form_for :demo, url: demo_path(@demo), method: :patch do |f| %>
 
   <% if @demo and @demo.errors.any? %>
@@ -13,7 +15,7 @@
 
   <p>
     <%= f.label :url %><br>
-    <%= :url %>
+    <%= @demo.url %>
   </p>
  
   <p>
