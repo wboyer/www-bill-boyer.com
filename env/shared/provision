@@ -55,6 +55,8 @@ cat > /etc/apache2/sites-available/default <<EOF
   ProxyPass /blog !
   ProxyPass /test/php !
   ProxyPass /test/html !
+  ProxyPass /favicon.ico !
+  ProxyPass /googleb3e16bb506c5133e.html !
 
   ProxyPass /api http://localhost:3000
 
