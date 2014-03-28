@@ -30,7 +30,7 @@ Site.Menu = {
 
 		li = document.createElement("li");
 		li.setAttribute("data-theme", "{{theme}}");
-		li.setAttribute("ng-repeat", "theme in ['default', 'amelia', 'cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'readable', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti']");
+		li.setAttribute("ng-repeat", "theme in ['cerulean', 'default', 'amelia', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'readable', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti']");
 		li.className += " themes-menu-item dropdown";
 		ul.appendChild(li);
 
