@@ -2,12 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.demo-thumbnail {
+  width: 120px
+}
 
-.demo-thumbnail {width: 120px}
-.demo-detail {padding-bottom: 20px};
-.demo-detail-thumbnail {width: 75px; float: right}
+.demo-detail {
+  padding-bottom: 20px
+}
 
-#demo-tab-content {overflow: hidden}
+;
+.demo-detail-thumbnail {
+  width: 75px;
+  float: right
+}
+
+#demo-tab-content {
+  overflow: hidden
+}
 
 #demo {
   background-color: #f5f5f5;
@@ -15,4 +26,6 @@
   padding: 5px;
 }
 
-input {padding: 0px 5px}
+input {
+  padding: 0px 5px
+}

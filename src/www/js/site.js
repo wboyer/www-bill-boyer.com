@@ -46,10 +46,10 @@ Site.Menu = {
 
 var themesApp = angular.module('themesApp', []);
 
-themesApp.directive("li", function () {
+themesApp.directive("li", function() {
 	return {
 		restrict: 'E',
-		link: function (scope, element) {
+		link: function(scope, element) {
 			var item = element[0];
 			if (window.currentTheme == scope.theme)
 				item.className += " active";

@@ -20,9 +20,8 @@ Site.Util = {
 			var hash = window.location.hash.replace(name + "=" + value, "");
 			if (hash.indexOf("&") === 0)
 				hash = hash.substring(1);
-			else
-				if (hash.indexOf("&") === (hash.length - 1))
-					hash = hash.substring(0, hash.length - 1);
+			else if (hash.indexOf("&") === (hash.length - 1))
+				hash = hash.substring(0, hash.length - 1);
 			if (hash == "#")
 				history.pushState('', document.title, window.location.pathname);
 			else

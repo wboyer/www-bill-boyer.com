@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 			}
 		},
 
-        compass: {
+		compass: {
 			facts: {
 				options: {
 					sassDir: '<%= grunt.option("src") %>/facts-js/src/css',
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 					noLineComments: true
 				}
 			}
-        },
+		},
 
 		concat: {
 			'facts-db': {
@@ -165,7 +165,7 @@ module.exports = function(grunt) {
 				tasks: ['cssmin']
 			},
 			compass: {
-				files: ['<%= grunt.option("src") %>/src/www/css/sass/**','<%= grunt.option("src") %>/facts-js/src/css/**'],
+				files: ['<%= grunt.option("src") %>/src/www/css/sass/**', '<%= grunt.option("src") %>/facts-js/src/css/**'],
 				tasks: ['compass']
 			},
 			'js-1': {
