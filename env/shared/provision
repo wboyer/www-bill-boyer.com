@@ -51,6 +51,7 @@ cat > /etc/apache2/sites-available/default <<EOF
 
   ProxyPass /js !
   ProxyPass /css !
+  ProxyPass /img !
   ProxyPass /aux !
   ProxyPass /blog !
   ProxyPass /test/php !

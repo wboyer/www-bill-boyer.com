@@ -68,7 +68,7 @@ Site.Util = {
 				if (name)
 					this.removeHashParam("theme");
 				else
-					name = "default";
+					name = "cerulean";
 			}
 		}
 
@@ -76,8 +76,10 @@ Site.Util = {
 		var href = "/css/themes/" + name + "/bootstrap.css";
 
 		var link = document.getElementById("theme");
-		if (link)
-			link.setAttribute("href", href);
+		if (link) {
+			if (link.getAttribute("href") != href)
+				link.setAttribute("href", href);
+		}
 		else {
 			link = document.createElement("link");
 			link.setAttribute("type", "text/css");
