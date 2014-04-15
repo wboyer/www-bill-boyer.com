@@ -41,6 +41,8 @@ Site.Util = {
 		if (index >= 0) {
 			cookie = cookie.substring(index + match.length);
 			index = cookie.indexOf(";");
+			if (index == -1)
+				index = cookie.length;
 			return cookie.substring(0, index);
 		}
 	},
@@ -64,8 +66,10 @@ Site.Util = {
 				this.removeHashParam("theme");
 			else {
 				name = this.getHashParam("theme");
-				if (name)
+				if (name) {
 					this.removeHashParam("theme");
+					this.setCookie("theme", name);
+				}
 				else
 					name = "cerulean";
 			}
