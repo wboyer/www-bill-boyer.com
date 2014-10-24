@@ -5,23 +5,24 @@ module.exports = function(grunt) {
 		cssmin: {
 			www: {
 				src: ['<%= grunt.option("src") %>/src/www/css/*.css'],
-				dest: '<%= grunt.option("www-dest") %>/dist/css/style.css'
+				dest: '<%= grunt.option("dest") %>/www/dist/css/style.css'
 			}
 		},
 
 		compass: {
 			facts: {
 				options: {
-					sassDir: '<%= grunt.option("src") %>/facts-js/src/css',
-					cssDir: '<%= grunt.option("www-dest") %>/dist/css',
+					sassDir: '<%= grunt.option("dest") %>/www/dist/facts-js/src/css',
+					cssDir: '<%= grunt.option("dest") %>/www/dist/css',
 					outputStyle: 'compressed',
 					noLineComments: true
 				}
 			},
+
 			site: {
 				options: {
 					sassDir: '<%= grunt.option("src") %>/src/www/css/sass',
-					cssDir: '<%= grunt.option("www-dest") %>/dist/css',
+					cssDir: '<%= grunt.option("dest") %>/www/dist/css',
 					outputStyle: 'compressed',
 					noLineComments: true
 				}
@@ -29,88 +30,71 @@ module.exports = function(grunt) {
 		},
 
 		concat: {
-			'facts-db': {
+			facts: {
 				options: {
 					separator: ';'
 				},
-				src: ['<%= grunt.option("src") %>/facts-db/src/api/js/**/*.js'],
-				dest: '<%= grunt.option("node-dest") %>/dist/facts-db.js'
+				src: ['<%= grunt.option("dest") %>/www/dist/facts-js/src/js/**/*.js'],
+				dest: '<%= grunt.option("dest") %>/www/dist/js/facts-js.js'
 			},
 
-			'facts-js': {
-				options: {
-					separator: ';'
-				},
-				src: ['<%= grunt.option("src") %>/facts-js/src/js/**/*.js'],
-				dest: '<%= grunt.option("www-dest") %>/dist/js/facts-js.js'
-			},
-
-			'head-js': {
+			head: {
 				options: {
 					separator: ';'
 				},
 				src: ['<%= grunt.option("src") %>/src/www/js/head/**/*.js'],
-				dest: '<%= grunt.option("www-dest") %>/dist/js/head.js'
+				dest: '<%= grunt.option("dest") %>/www/dist/js/head.js'
 			},
 
-			'site-js': {
+			site: {
 				options: {
 					separator: ';'
 				},
 				src: ['<%= grunt.option("src") %>/src/www/js/*.js'],
-				dest: '<%= grunt.option("www-dest") %>/dist/js/site.js'
+				dest: '<%= grunt.option("dest") %>/www/dist/js/site.js'
 			}
 		},
 
 		uglify: {
-			'facts-db': {
-				options: {
-					banner: '/*! facts-db <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-				},
-				files: {
-					'<%= grunt.option("node-dest") %>/dist/facts-db.min.js': '<%= grunt.option("node-dest") %>/dist/facts-db.js'
-				}
-			},
-
-			'facts-js': {
+			facts: {
 				options: {
 					banner: '/*! facts-js <%= grunt.template.today("dd-mm-yyyy") %> */\n'
 				},
 				files: {
-					'<%= grunt.option("www-dest") %>/dist/js/facts-js.min.js': '<%= grunt.option("www-dest") %>/dist/js/facts-js.js'
+					'<%= grunt.option("dest") %>/www/dist/js/facts-js.min.js': '<%= grunt.option("dest") %>/www/dist/js/facts-js.js'
 				}
 			},
 
-			'head-js': {
+			head: {
 				options: {
 					banner: '/*! head-js <%= grunt.template.today("dd-mm-yyyy") %> */\n'
 				},
 				files: {
-					'<%= grunt.option("www-dest") %>/dist/js/head.min.js': '<%= grunt.option("www-dest") %>/dist/js/head.js'
+					'<%= grunt.option("dest") %>/www/dist/js/head.min.js': '<%= grunt.option("dest") %>/www/dist/js/head.js'
 				}
 			},
 
-			'site-js': {
+			site: {
 				options: {
 					banner: '/*! site-js <%= grunt.template.today("dd-mm-yyyy") %> */\n'
 				},
 				files: {
-					'<%= grunt.option("www-dest") %>/dist/js/site.min.js': '<%= grunt.option("www-dest") %>/dist/js/site.js'
+					'<%= grunt.option("dest") %>/www/dist/js/site.min.js': '<%= grunt.option("dest") %>/www/dist/js/site.js'
 				}
 			},
 
-			'node-main': {
+			'node': {
 				options: {
 					banner: '/*! node-main <%= grunt.template.today("dd-mm-yyyy") %> */\n'
 				},
 				files: {
-					'<%= grunt.option("node-dest") %>/dist/main.min.js': '<%= grunt.option("src") %>/src/node/main.js'
+					'<%= grunt.option("dest") %>/node/dist/main.min.js': '<%= grunt.option("src") %>/src/node/main.js'
 				}
 			}
 		},
 
 		jshint: {
-			files: ['Gruntfile.js', '<%= grunt.option("src") %>/src/www/js/**', '<%= grunt.option("src") %>/src/node/**/*.js', '<%= grunt.option("src") %>/facts-db/**/*.js', '<%= grunt.option("src") %>/facts-js/**/*.js'],
+			files: ['Gruntfile.js', '<%= grunt.option("src") %>/src/www/js/**', '<%= grunt.option("src") %>/src/node/**/*.js'],
 			options: {
 				globals: {
 					console: true,
@@ -122,40 +106,43 @@ module.exports = function(grunt) {
 
 		shell: {
 			'copy-docroot': {
-				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/ <%= grunt.option("www-dest") %>/docroot'
+				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/ <%= grunt.option("dest") %>/www/docroot'
 			},
-			'build-themes': {
-				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/css/themes/ <%= grunt.option("www-dest") %>/dist/css/themes'
-			},
-			'build-fonts': {
-				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/fonts/ <%= grunt.option("www-dest") %>/dist/css/themes/fonts'
+			'copy-wp': {
+				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/wordpress/theme <%= grunt.option("dest") %>/wordpress/wp-content/themes/blog.bill-boyer.com'
 			},
 			'copy-rails': {
-				command: 'rsync -rt --delete --exclude .git --exclude tmp --exclude log <%= grunt.option("src") %>/src/rails/ <%= grunt.option("rails-dest") %>/www.bill-boyer.com; cd <%= grunt.option("rails-dest") %>/www.bill-boyer.com; RAILS_ENV=production bundle exec rake assets:precompile'
+				command: 'rsync -rt --delete --exclude .git --exclude tmp --exclude log <%= grunt.option("src") %>/src/rails/ <%= grunt.option("dest") %>/rails/www.bill-boyer.com'
 			},
-			'copy-facts-js-test': {
-				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/facts-js <%= grunt.option("www-dest") %>/aux'
+			'build-themes': {
+				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/css/themes/ <%= grunt.option("dest") %>/www/dist/css/themes'
+			},
+			'build-fonts': {
+				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/fonts/ <%= grunt.option("dest") %>/www/dist/css/themes/fonts'
+			},
+			'build-rails': {
+				command: 'cd <%= grunt.option("dest") %>/rails/www.bill-boyer.com; bundle update; RAILS_ENV=production bundle exec rake assets:precompile'
+			},
+			'build-wp': {
+				command: 'cd <%= grunt.option("dest") %>/wordpress/wp-content/themes/blog.bill-boyer.com; ./copy-from-rails <%= grunt.option("dest") %>/rails/app/views/layout'
 			},
 			'deploy-docroot': {
-				command: 'rsync -rt --delete <%= grunt.option("src") %>/src/www/ <%= grunt.option("www-dest") %>/docroot'
-			},
-			'deploy-facts-js-test': {
-				command: 'rsync -rt --delete <%= grunt.option("src") %>/facts-js <%= grunt.option("www-dest") %>/aux'
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/src/www/ <%= grunt.option("dest") %>/www/docroot'
 			},
 			'deploy-www-dist': {
-				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/www/dist/ <%= grunt.option("www-dest") %>/dist'
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/www/dist/ <%= grunt.option("dest") %>/www/dist'
 			},
 			'deploy-node': {
-				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/node/dist/ <%= grunt.option("node-dest") %>/dist'
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/node/dist/ <%= grunt.option("dest") %>/node/dist'
 			},
 			'bounce-apache': {
 				command: 'service apache2 restart'
 			},
 			'bounce-passenger': {
-				command: 'cd <%= grunt.option("rails-dest") %>/www.bill-boyer.com; passenger stop --port 81; RAILS_ENV=<%= grunt.option("rails-env") %> passenger start --daemonize --port 81'
+				command: 'cd <%= grunt.option("dest") %>/rails/www.bill-boyer.com; passenger stop --port 81; RAILS_ENV=<%= grunt.option("rails-env") %> passenger start --daemonize --port 81'
 			},
 			'bounce-node': {
-				command: 'service api.bill-boyer.com restart'
+				command: 'service node-js restart'
 			}
 		},
 
@@ -168,12 +155,8 @@ module.exports = function(grunt) {
 				files: ['<%= grunt.option("src") %>/src/www/css/sass/**', '<%= grunt.option("src") %>/facts-js/src/css/**'],
 				tasks: ['compass']
 			},
-			'js-1': {
+			js: {
 				files: ['<%= grunt.option("src") %>/src/www/js/**/*.js', '<%= grunt.option("src") %>/src/node/**/*.js'],
-				tasks: ['build', 'shell:bounce-node']
-			},
-			'js-2': {
-				files: ['<%= grunt.option("src") %>/facts-db/**/*.js', '<%= grunt.option("src") %>/facts-js/**/*.js'],
 				tasks: ['build', 'shell:bounce-node']
 			},
 			docroot: {
@@ -182,12 +165,8 @@ module.exports = function(grunt) {
 			},
 			rails: {
 				files: ['<%= grunt.option("src") %>/src/rails/**'],
-				tasks: ['shell:copy-rails', 'shell:bounce-passenger']
+				tasks: ['shell:copy-rails', 'shell:build-rails', 'shell:bounce-passenger']
 			},
-			'facts-js-test': {
-				files: ['<%= grunt.option("src") %>/facts-js/**'],
-				tasks: ['shell:copy-facts-js-test']
-			}
 		}
 	});
 
@@ -199,13 +178,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-rails', 'shell:copy-facts-js-test']);
-	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin', 'compass', 'shell:build-themes', 'shell:build-fonts']);
+	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-rails']);
+	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin', 'compass', 'shell:build-themes', 'shell:build-fonts', 'shell:build-rails']);
 
 	grunt.registerTask('copy-build', ['copy', 'build']);
 	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-apache', 'shell:bounce-passenger', 'shell:bounce-node']);
 
-	grunt.registerTask('deploy', ['shell:deploy-www-dist', 'shell:deploy-docroot', 'shell:deploy-facts-js-test', 'shell:deploy-node']);
+	grunt.registerTask('deploy', ['shell:deploy-www-dist', 'shell:deploy-docroot', 'shell:deploy-node']);
 	grunt.registerTask('deploy-bounce', ['copy', 'deploy', 'shell:bounce-apache', 'shell:bounce-node']);
 };
-

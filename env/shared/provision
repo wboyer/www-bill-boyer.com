@@ -8,35 +8,27 @@ fi
 
 env=$1
 
-path=/vagrant-mnt/ops/scripts/provision/ubuntu
+ops=/vagrant-mnt/ops/scripts/provision/ubuntu
 
-$path/base www.bill-boyer.com $env
-$path/apache
-$path/php
-$path/wordpress
-$path/node
-$path/ruby
-$path/sqlite
-$path/rails www.bill-boyer.com
-$path/mongodb
-$path/grunt
-$path/compass
-
-mkdir /srv/www/aux
-mkdir /srv/www/dist
+$ops/base www.bill-boyer.com $env
+$ops/git
+$ops/apache
+$ops/php
+$ops/wordpress
+$ops/node
+$ops/ruby
+$ops/sqlite
+$ops/rails www.bill-boyer.com
+$ops/mongodb
+$ops/grunt
+$ops/compass
 
 cat > /etc/apache2/sites-available/default <<EOF
 <VirtualHost *:80>
-  ServerAdmin webmaster@localhost
   ServerName *.bill-boyer.com
   ServerAlias *.compute.amazonaws.com
 
   DocumentRoot /srv/www/docroot
-  <Directory />
-    Options FollowSymLinks
-    AllowOverride All
-  </Directory>
-
   <Directory /srv/www/docroot/>
     Options Indexes FollowSymLinks MultiViews
     AllowOverride All
@@ -46,13 +38,11 @@ cat > /etc/apache2/sites-available/default <<EOF
 
   Alias /js /srv/www/dist/js
   Alias /css /srv/www/dist/css
-  Alias /aux /srv/www/aux
   Alias /blog /srv/www/wordpress
 
   ProxyPass /js !
   ProxyPass /css !
   ProxyPass /img !
-  ProxyPass /aux !
   ProxyPass /blog !
   ProxyPass /test/php !
   ProxyPass /test/html !
@@ -71,45 +61,57 @@ cat > /etc/apache2/sites-available/default <<EOF
 
 <VirtualHost *:80>
   ServerName bill-boyer.com
-  ServerAlias william-boyer.com *.william-boyer.com
+  ServerAlias william-boyer.com *.william-boyer.com boyer.nyc *.boyer.nyc
   Redirect permanent / http://www.bill-boyer.com/
 </VirtualHost>
 EOF
 
 service apache2 restart
 
-mkdir /srv/node
-mkdir /srv/node/api.bill-boyer.com
+curl http://localhost/blog/
 
-cat > /etc/init/api.bill-boyer.com.conf <<EOF
+tmp=`mktemp -d`
+cd $tmp
+cp /vagrant/tmp/mongodb.dmp .
+tar xvf mongodb.dump
+mongorestore dump
+cd
+rm -rf $tmp
 
-description "node.js server for api.bill-boyer.com"
-author      "kvz - http://kevin.vanzonneveld.net"
+cp /vagrant/tmp/wordpress.sqlite /srv/www/wordpress/wp-content/database/.ht.sqlite
+chown www-data /srv/www/wordpress/wp-content/database/.ht.sqlite
 
-# used to be: start on startup
-# until we found some mounts weren't ready yet while booting:
+cp /vagrant/tmp/rails.sqlite /srv/rails/www.bill-boyer.com/db/development.sqlite3
+
+cd /srv/www
+rm -rf dist
+mkdir dist
+
+rm -rf /srv/node
+mkdir -p /srv/node
+cd /srv/node
+mkdir dist
+
+cp /vagrant-mnt/env/shared/package.json .
+npm install
+
+cp /vagrant-mnt/env/shared/bower.json .
+cp /vagrant-mnt/env/shared/.bowerrc .
+./node_modules/bower/bin/bower --allow-root install
+
+cat > /etc/init/node-js.conf <<EOF
+
 start on started mountall
 stop on shutdown
 
-# Automatically Respawn:
 respawn
 respawn limit 99 5
 
 script
-    # Not sure why $HOME is needed, but we found that it is:
-    export HOME="/root"
-
-    exec /usr/bin/node /srv/node/api.bill-boyer.com/dist/main.min.js >> /var/log/node.log 2>&1
-end script
-
-post-start script
-   # Optionally put a script here that will notifiy you node has (re)started
-   # /root/bin/hoptoad.sh "node.js has started!"
+    export NODE_PATH=$NODE_PATH:/srv/node/node_modules
+    exec /usr/bin/node /srv/node/dist/main.min.js >> /var/log/node.log 2>&1
 end script
 
 EOF
 
-service api.bill-boyer.com restart
-
-cd /vagrant-mnt/facts-db/test/
-./build-facts-collection
+service node-js restart

@@ -1,0 +1,21 @@
+{
+  "name": "www.bill-boyer.com",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "*",
+    "mongodb": "*",
+    "facts-db": "https://github.com/wboyer/facts-db/archive/master.tar.gz"
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-shell": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-compass": "*",
+    "grunt-contrib-watch": "*",
+    "bower": "*"
+  }
+}

@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+body {
+  line-height: 1.6;
+}
+
 h1, h2, h3, h4, h5, .panel-heading, .navbar-nav, .navbar-brand {
   text-transform: lowercase
 }
@@ -15,6 +19,10 @@ h1 {
 
 .panel-body {
   font-size: 0.9em;
+}
+
+li {
+  padding-bottom: 10px;
 }
 
 footer {

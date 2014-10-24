@@ -1,8 +1,6 @@
 #!/bin/bash
 
-cd /srv/node/api.bill-boyer.com
-cp /vagrant-mnt/env-shared/Gruntfile.js .
-cp /vagrant-mnt/facts-db/package.json .
-npm install
-/bin/rm -rf dist/* ../../www/dist/*
-grunt deploy-bounce --src=/vagrant-mnt --www-dest=../../www --rails-dest=../../rails --node-dest=. --rails-env=test
+cd /srv/node
+
+cp /vagrant-mnt/env/shared/Gruntfile.js .
+grunt deploy-bounce --src=/vagrant-mnt --dest=.. --rails-env=test

@@ -1,0 +1,13 @@
+{
+  "name": "www.bill-boyer.com",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "jquery": null,
+    "modernizr": null,
+    "socket.io-client": null,
+    "facts-js": "https://github.com/wboyer/facts-js.git",
+    "prioritized-queue": "https://github.com/wboyer/prioritized-queue-js.git",
+    "requirejs": null
+  }
+}

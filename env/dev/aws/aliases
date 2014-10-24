@@ -1,5 +1,5 @@
-alias create='vagrant up --provider=aws'
+alias create='../../shared/get-latest-databases ../../../../ops.bill-boyer.com/scripts/infrastructure/aws; vagrant up --provider=aws'
 alias destroy='vagrant destroy -f'
 alias stop='vagrant halt'
 alias bounce='vagrant reload'
-alias deploy='vagrant ssh -c "/vagrant/deploy"'
+alias deploy='vagrant ssh -c "sudo /vagrant/deploy"'

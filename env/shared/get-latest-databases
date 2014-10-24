@@ -1,0 +1,12 @@
+#!/bin/bash --noprofile
+
+path=$1
+
+if [ ! -d "tmp" ];
+then
+   mkdir tmp
+fi
+
+$path/restore-file tmp/wordpress.sqlite /www.bill-boyer.com/backups/wordpress
+$path/restore-file tmp/rails.sqlite /www.bill-boyer.com/backups/rails
+$path/restore-file tmp/mongodb.dump /www.bill-boyer.com/backups/mongodb

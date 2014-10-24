@@ -1,4 +1,4 @@
-alias create='vagrant up --provider=vmware_fusion'
+alias create='../../shared/get-latest-databases ../../../../ops.bill-boyer.com/scripts/infrastructure/aws; vagrant up --provider=vmware_fusion'
 alias destroy='vagrant destroy -f'
 alias stop='vagrant halt'
 alias bounce='vagrant reload'
