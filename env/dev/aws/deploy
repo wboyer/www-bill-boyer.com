@@ -1,8 +1,6 @@
 #!/bin/bash
 
-cd /srv/node/api.bill-boyer.com
+cd /srv/node
+
 cp /vagrant-mnt/env/shared/Gruntfile.js .
-cp /vagrant-mnt/facts-db/package.json .
-npm install
-/bin/rm -rf dist/* ../../www/dist/*
-grunt copy-build-bounce --src=/vagrant-mnt --dest=../.. --rails-env=development
+grunt copy-build-bounce --src=/vagrant-mnt --dest=.. --rails-env=development

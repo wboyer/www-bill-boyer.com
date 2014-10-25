@@ -72,7 +72,7 @@ curl http://localhost/blog/
 
 tmp=`mktemp -d`
 cd $tmp
-cp /vagrant/tmp/mongodb.dmp .
+cp /vagrant/tmp/mongodb.dump .
 tar xvf mongodb.dump
 mongorestore dump
 cd
