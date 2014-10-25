@@ -29,6 +29,20 @@ footer {
   font-size: 0.8em;
 }
 
+.fb-like {
+  float: left;
+}
+
+.tweet-button {
+  float: left;
+  padding: 0 0 0 10px;
+}
+
+.g-plus {
+  float: left;
+  padding: 0 0 0 10px;
+}
+
 @media (min-width: 1200px) {
   .left-col {
 	padding-left: 0px;
