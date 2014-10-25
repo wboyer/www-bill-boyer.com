@@ -1,4 +1,4 @@
-#!/bin/bash --noprofile
+#!/bin/bash
 
 if [ ! -d "/vagrant-mnt/ops/scripts" ];
 then
