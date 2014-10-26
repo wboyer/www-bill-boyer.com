@@ -17,8 +17,9 @@ $ops/php
 $ops/wordpress
 $ops/node
 $ops/ruby
+$ops/rails
 $ops/sqlite
-$ops/rails www.bill-boyer.com
+$ops/passenger www.bill-boyer.com
 $ops/mongodb
 $ops/grunt
 $ops/compass
