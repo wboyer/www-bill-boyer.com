@@ -1,17 +1,18 @@
 #!/bin/bash
 
-mkdir -p build
-cd build
+mkdir -p build/node
+cd build/node
 
-cp ../env/shared/package.json .
+cp ../../env/shared/package.json .
 npm install
 
-cp ../env/shared/bower.json .
-cp ../env/shared/.bowerrc .
+cp ../../env/shared/bower.json .
+cp ../../env/shared/.bowerrc .
 ./node_modules/bower/bin/bower --allow-root install
 
-cp ../env/shared/Gruntfile.js .
-grunt build --src=.. --dest=../dist
+mkdir ../rails
+cp ../../env/shared/Gruntfile.js .
+grunt copy-build --src=../.. --dest=..
 
 # test
 # publish to artifact repository
