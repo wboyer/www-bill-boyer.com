@@ -126,14 +126,14 @@ module.exports = function(grunt) {
 			'build-wp': {
 				command: 'cd <%= grunt.option("dest") %>/wordpress/wp-content/themes/blog.bill-boyer.com; ./copy-from-rails <%= grunt.option("dest") %>/rails/app/views/layout'
 			},
-			'deploy-docroot': {
-				command: 'rsync -rt --delete <%= grunt.option("src") %>/src/www/ <%= grunt.option("dest") %>/www/docroot'
-			},
-			'deploy-www-dist': {
-				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/www/dist/ <%= grunt.option("dest") %>/www/dist'
+			'deploy-www': {
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/www/ <%= grunt.option("dest") %>/www'
 			},
 			'deploy-node': {
-				command: 'rsync -rt --delete <%= grunt.option("src") %>/dist/node/dist/ <%= grunt.option("dest") %>/node/dist'
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/node/dist/ <%= grunt.option("dest") %>/node/dist'
+			},
+			'deploy-rails': {
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/rails/ <%= grunt.option("dest") %>/rails'
 			},
 			'bounce-apache': {
 				command: 'service apache2 restart'
@@ -184,6 +184,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('copy-build', ['copy', 'build']);
 	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-apache', 'shell:bounce-passenger', 'shell:bounce-node']);
 
-	grunt.registerTask('deploy', ['shell:deploy-www-dist', 'shell:deploy-docroot', 'shell:deploy-node']);
-	grunt.registerTask('deploy-bounce', ['copy', 'deploy', 'shell:bounce-apache', 'shell:bounce-node']);
+	grunt.registerTask('deploy', ['shell:deploy-www', 'shell:deploy-node', 'shell:deploy-rails']);
+	grunt.registerTask('deploy-bounce', ['deploy', 'shell:bounce-apache', 'shell:bounce-node']);
 };
