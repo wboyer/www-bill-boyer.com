@@ -3,15 +3,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 
 		compass: {
-			facts: {
-				options: {
-					sassDir: '<%= grunt.option("dest") %>/www/dist/facts-js/src/css',
-					cssDir: '<%= grunt.option("dest") %>/www/dist/css',
-					outputStyle: 'compressed',
-					noLineComments: true
-				}
-			},
-
 			site: {
 				options: {
 					sassDir: '<%= grunt.option("src") %>/src/www/css/sass',
@@ -23,14 +14,6 @@ module.exports = function(grunt) {
 		},
 
 		concat: {
-			facts: {
-				options: {
-					separator: ';'
-				},
-				src: ['<%= grunt.option("dest") %>/www/dist/facts-js/src/js/**/*.js'],
-				dest: '<%= grunt.option("dest") %>/www/dist/js/facts-js.js'
-			},
-
 			head: {
 				options: {
 					separator: ';'
@@ -49,15 +32,6 @@ module.exports = function(grunt) {
 		},
 
 		uglify: {
-			facts: {
-				options: {
-					banner: '/*! facts-js <%= grunt.template.today("dd-mm-yyyy") %> */\n'
-				},
-				files: {
-					'<%= grunt.option("dest") %>/www/dist/js/facts-js.min.js': '<%= grunt.option("dest") %>/www/dist/js/facts-js.js'
-				}
-			},
-
 			head: {
 				options: {
 					banner: '/*! head-js <%= grunt.template.today("dd-mm-yyyy") %> */\n'
@@ -141,7 +115,7 @@ module.exports = function(grunt) {
 
 		watch: {
 			compass: {
-				files: ['<%= grunt.option("src") %>/src/www/css/sass/**', '<%= grunt.option("src") %>/facts-js/src/css/**'],
+				files: ['<%= grunt.option("src") %>/src/www/css/sass/**'],
 				tasks: ['compass']
 			},
 			js: {
