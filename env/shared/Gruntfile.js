@@ -2,13 +2,6 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 
-		cssmin: {
-			www: {
-				src: ['<%= grunt.option("src") %>/src/www/css/*.css'],
-				dest: '<%= grunt.option("dest") %>/www/dist/css/style.css'
-			}
-		},
-
 		compass: {
 			facts: {
 				options: {
@@ -147,10 +140,6 @@ module.exports = function(grunt) {
 		},
 
 		watch: {
-			css: {
-				files: ['<%= cssmin.www.src %>'],
-				tasks: ['cssmin']
-			},
 			compass: {
 				files: ['<%= grunt.option("src") %>/src/www/css/sass/**', '<%= grunt.option("src") %>/facts-js/src/css/**'],
 				tasks: ['compass']
@@ -171,7 +160,6 @@ module.exports = function(grunt) {
 	});
 
 	grunt.loadNpmTasks('grunt-shell');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -179,7 +167,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-rails']);
-	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'cssmin', 'compass', 'shell:build-themes', 'shell:build-fonts', 'shell:build-rails']);
+	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'compass', 'shell:build-themes', 'shell:build-fonts', 'shell:build-rails']);
 
 	grunt.registerTask('copy-build', ['copy', 'build']);
 	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-apache', 'shell:bounce-passenger', 'shell:bounce-node']);
