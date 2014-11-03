@@ -87,8 +87,8 @@ Site.Util = {
 			link = document.createElement("link");
 			link.setAttribute("type", "text/css");
 			link.setAttribute("rel", "stylesheet");
-			link.setAttribute("href", href);
 			document.getElementsByTagName("head")[0].appendChild(link);
+			link.setAttribute("href", href);
 		}
 	}
 };
