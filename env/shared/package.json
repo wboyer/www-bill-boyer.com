@@ -5,7 +5,9 @@
   "dependencies": {
     "express": "*",
     "mongodb": "*",
-    "facts-db": "https://github.com/wboyer/facts-db/archive/master.tar.gz"
+    "socket.io": "*",
+    "facts-db": "https://github.com/wboyer/facts-db/archive/master.tar.gz",
+    "prioritized-queue": "https://github.com/wboyer/prioritized-queue-js/archive/master.tar.gz"
   },
   "devDependencies": {
     "grunt": "*",
