@@ -1,0 +1,2 @@
+class AboutSiteController < ApplicationController
+end

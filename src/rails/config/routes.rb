@@ -56,5 +56,8 @@ WwwBillBoyerCom::Application.routes.draw do
 
   get '/rails' => "rails/welcome#index"
   root "welcome#index"
+  get '/about-me' => "about_me#index"
+  get '/about-this-site' => "about_site#index"
+  get '/about-this-site/deployment-pipeline' => "deployment_pipeline#index"
   resources :demos
 end

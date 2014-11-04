@@ -1,0 +1,51 @@
+<% content_for :title do %>Build and Deployment Pipeline<% end %>
+
+<h1>Build and Deployment Pipeline</h1>
+
+<p>In the development environment I've set up for myself, I've tried to implement these principles of continuous delivery:
+
+<ol>
+
+<li>version control</li>
+
+<li>automation</li>
+
+<li>repeatability</li>
+
+<li>testing</li>
+
+</ol>
+
+</p>
+
+<p>This diagram describes my current process:</p>
+
+<div id="diagram" class="panel panel-default">
+	<div class="panel-body" style="padding: 10px">
+		<object style="width: 100%" data="/img/about_site/pipeline.svg" type="image/svg+xml" id="graphic"></object>
+	</div>
+</div>
+
+<ul>
+
+<li>My local machine, a Mac, runs my interactive development tools &#8212; git, emacs, Eclipse, Safari &#8212; and hosts the working trees for all my projects.  But that's all it does.</li>
+
+<li>Everything else runs inside an Ubuntu Linux VM, hosted by <a href="http://store.vmware.com/store/vmware/en_US/pd/productID.285051300">VMware Fusion for OS X</a> and managed by <a href="http://www.vagrantup.com">Vagrant</a>. Vagrant rsyncs source files from the OSX filesystem to the VM's.  Then Grunt, running inside the VM, compiles and copies them to the places they need to go for execution.</li>
+
+<li>The great thing about Vagrant is that it can manage AWS instances using the exact same machine images and provisioning process as it uses for the local VM.  So my local development environment is guaranteed to be identical to my AWS-based QA and production environments.  I can also make AWS-based dev instances, if I want to make my code reachable over the Internet before it has been released.</li>
+
+<li>When it's time to release, I create a <a href="http://semver.org/">semver</a> tag and push it to GitHub.  I then manually ask Jenkins, running on my "ops" server at <a href="ops.bill-boyer.com">ops.bill-boyer.com</a>, to execute a job that pulls that tag, does a full build on it, tests it, and deploys it to a freshly-provisioned QA instance.</li>
+
+<li>
+As of now, the build artifacts just remain in the directory on the "ops" server's filesystem where the build job puts them; they don't go into a proper repository.  But they're identified by their tags, and the only way to deploy to production is to run another, different Jenkins job that <i>only</i> deploys, and doesn't re-build, one of these tagged releases.
+</li>
+
+<li>
+As of now, I've done all the scripting of this process myself, mostly in bash and a little in Ruby.  Vagrant handles most of the communication with AWS, but I've done few things myself using <a href="https://aws.amazon.com/cli/">AWS's CLI</a> and jq for parsing that API's JSON responses.  Even though I know that tools like Chef and services like Scalr exist to make this problem easier, I wanted to do it more manually, as a learning exercise.
+</li>
+
+</ul>
+
+<p>
+I'm still not quite to the point where I'm releasing continuously, but I'm getting there!!!
+</p>

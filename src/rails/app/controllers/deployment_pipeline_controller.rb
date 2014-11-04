@@ -1,0 +1,2 @@
+class DeploymentPipelineController < ApplicationController
+end
