@@ -3,4 +3,4 @@
 cd /srv/node
 
 cp /vagrant-mnt/env/shared/Gruntfile.js .
-grunt deploy-bounce --src=/vagrant-mnt --dest=.. --rails-env=production
+grunt deploy-bounce --src=/vagrant-mnt/build --dest=.. --rails-env=production

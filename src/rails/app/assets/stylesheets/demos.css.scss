@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .demo-thumbnail {
-  width: 192px
+  width: 128px
 }
 
 .demo-detail {
@@ -14,7 +14,8 @@
 .demo-detail-thumbnail {
   width: 256px;
   float: right;
-  margin-left: 10px
+  margin-left: 10px;
+  margin-bottom: 10px
 }
 
 #demo-tab-content {
