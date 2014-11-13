@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path=$1
+path=$OPS/infrastructure/aws
 
 if [ ! -d "tmp" ];
 then

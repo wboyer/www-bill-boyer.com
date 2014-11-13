@@ -1,0 +1,5 @@
+alias create='../shared/get-latest-databases; vagrant up --provider=aws 1; ../shared/create-cached-image dev-$USER'
+alias destroy='vagrant destroy -f 1'
+alias stop='vagrant halt 1'
+alias bounce='vagrant reload 1'
+alias deploy='vagrant ssh 1 -c "/vagrant/deploy"'

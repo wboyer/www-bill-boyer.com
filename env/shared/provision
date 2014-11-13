@@ -8,22 +8,23 @@ fi
 
 env=$1
 
-ops=/vagrant-mnt/ops/scripts/provision/ubuntu
+ops=/vagrant-mnt/ops/scripts
+path=$ops/provision/ubuntu
 
-$ops/base www.bill-boyer.com $env
-$ops/git
-$ops/apache
-$ops/php
-$ops/wordpress
-$ops/node
-$ops/ruby
-$ops/rails
-$ops/sqlite
-$ops/sqlite-php
-$ops/passenger www.bill-boyer.com
-$ops/mongodb
-$ops/grunt
-$ops/compass
+$path/base www.bill-boyer.com $env $ops
+$path/git
+$path/apache
+$path/php
+$path/wordpress
+$path/node
+$path/ruby
+$path/rails
+$path/sqlite
+$path/sqlite-php
+$path/passenger www.bill-boyer.com
+$path/mongodb
+$path/grunt
+$path/compass
 
 cat > /etc/apache2/sites-available/default <<EOF
 <VirtualHost *:80>

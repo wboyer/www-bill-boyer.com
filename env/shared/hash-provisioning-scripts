@@ -1,0 +1,3 @@
+#!/bin/bash
+
+$OPS/infrastructure/hash-files provision ../shared $OPS

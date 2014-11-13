@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ $# != 1 ] ;
+then
+	echo "Usage: create-cached-image <env>"
+	exit 1
+fi
+
+env=$1
+
+hash=`../shared/hash-provisioning-scripts`
+
+imageId=`$OPS/infrastructure/aws/image-by-name hash-$hash`
+
+if [ "$imageId" == "" ]
+then
+  instanceId=`cat .vagrant/machines/1/aws/id`
+  $OPS/infrastructure/aws/create-image hash-$hash $instanceId $env.bill-boyer.com
+fi

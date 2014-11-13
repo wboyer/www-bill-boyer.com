@@ -1,5 +1,0 @@
-alias create='../../shared/get-latest-databases ../../../../ops.bill-boyer.com/scripts/infrastructure/aws; vagrant up --provider=vmware_fusion'
-alias destroy='vagrant destroy -f'
-alias stop='vagrant halt'
-alias bounce='vagrant reload'
-alias watch='vagrant ssh -c "sudo /vagrant/watch"'
