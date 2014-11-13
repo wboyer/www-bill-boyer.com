@@ -142,10 +142,11 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-rails']);
 	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'compass', 'shell:build-themes', 'shell:build-fonts', 'shell:build-rails']);
+	grunt.registerTask('bounce', ['shell:bounce-apache', 'shell:bounce-passenger', 'shell:bounce-node']);
 
 	grunt.registerTask('copy-build', ['copy', 'build']);
-	grunt.registerTask('copy-build-bounce', ['copy-build', 'shell:bounce-apache', 'shell:bounce-passenger', 'shell:bounce-node']);
+	grunt.registerTask('copy-build-bounce', ['copy-build', 'bounce']);
 
 	grunt.registerTask('deploy', ['shell:deploy-www', 'shell:deploy-node', 'shell:deploy-rails']);
-	grunt.registerTask('deploy-bounce', ['deploy', 'shell:bounce-apache', 'shell:bounce-node']);
+	grunt.registerTask('deploy-bounce', ['deploy', 'bounce']);
 };
