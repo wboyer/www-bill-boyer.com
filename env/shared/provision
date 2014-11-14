@@ -87,6 +87,7 @@ cp /vagrant/tmp/wordpress.sqlite /srv/www/wordpress/wp-content/database/.ht.sqli
 chown www-data /srv/www/wordpress/wp-content/database/.ht.sqlite
 
 cp /vagrant/tmp/rails.sqlite /srv/rails/www.bill-boyer.com/db/development.sqlite3
+cp /vagrant/tmp/rails.sqlite /srv/rails/www.bill-boyer.com/db/production.sqlite3
 
 cd /srv/www
 rm -rf dist

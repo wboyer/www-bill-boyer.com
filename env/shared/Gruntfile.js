@@ -106,7 +106,7 @@ module.exports = function(grunt) {
 				command: 'service apache2 restart'
 			},
 			'bounce-passenger': {
-				command: 'cd <%= grunt.option("dest") %>/rails/www.bill-boyer.com; passenger stop --port 81 --pid-file /tmp/passenger.81.pid; RAILS_ENV=<%= grunt.option("rails-env") %> passenger start --daemonize --port 81 --pid-file /tmp/passenger.81.pid'
+				command: 'cd <%= grunt.option("dest") %>/rails/www.bill-boyer.com; passenger stop --port 81 --pid-file /tmp/passenger.81.pid; bundle install; RAILS_ENV=<%= grunt.option("rails-env") %> passenger start --daemonize --port 81 --pid-file /tmp/passenger.81.pid'
 			},
 			'bounce-node': {
 				command: 'service node-js restart'
