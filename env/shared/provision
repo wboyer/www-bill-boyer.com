@@ -99,6 +99,10 @@ mkdir dist
 
 cp /vagrant-mnt/env/shared/package.json .
 npm install
+sleep 30
+npm install
+sleep 30
+npm install
 
 cp /vagrant-mnt/env/shared/bower.json .
 cp /vagrant-mnt/env/shared/.bowerrc .
