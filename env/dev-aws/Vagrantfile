@@ -28,7 +28,7 @@ Vagrant.configure('2') do |config|
   config.vm.synced_folder '../shared', '/vagrant-mnt/env/shared'
   config.vm.synced_folder '../../../ops.bill-boyer.com/', '/vagrant-mnt/ops'
 
-  config.vm.define "1", primary: true
-  config.vm.define "2"
-  config.vm.define "3"
+  config.vm.define '1', primary: true
+  config.vm.define '2'
+  config.vm.define '3'
 end

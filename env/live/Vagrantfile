@@ -1,33 +1,35 @@
-Vagrant.configure("2") do |config|
-  config.vm.box = "aws"
+load '../shared/vagrant-get-cached-image.rb'
+
+Vagrant.configure('2') do |config|
+  config.vm.box = 'aws'
 
   config.vm.provider :aws do |aws, override|
     aws.access_key_id = ENV['AWS_ACCESS_KEY']
     aws.secret_access_key = ENV['AWS_SECRET_KEY']
-    aws.region = "us-west-2"
-    aws.keypair_name = "bill-boyer.com"
-    aws.security_groups = ["bill-boyer.com"]
-    aws.ami = "ami-986bffa8"
-    aws.instance_type = "t1.micro"
+    aws.region = 'us-west-2'
+    aws.keypair_name = 'bill-boyer.com'
+    aws.security_groups = ['bill-boyer.com']
+    aws.ami = $imageId
+    aws.instance_type = 't1.micro'
 
     aws.tags = {
       'Name' => 'www.bill-boyer.com'
     }
 
-    override.ssh.username = "root"
+    override.ssh.username = 'root'
     override.ssh.private_key_path = ENV['AWS_PRIVATE_KEY_PATH']
   end
 
-  config.vm.provision :shell do |s|
-    s.path = "provision"
+  if $provision
+    config.vm.provision :shell, :path => $provision
   end
 
-  config.vm.synced_folder "../../src", "/vagrant-mnt/src"
-  config.vm.synced_folder "../../build", "/vagrant-mnt/build"
-  config.vm.synced_folder "../shared", "/vagrant-mnt/env/shared"
-  config.vm.synced_folder "/vagrant-mnt/ops", "/vagrant-mnt/ops"
+  config.vm.synced_folder '../../src', '/vagrant-mnt/src'
+  config.vm.synced_folder '../../build', '/vagrant-mnt/build'
+  config.vm.synced_folder '../shared', '/vagrant-mnt/env/shared'
+  config.vm.synced_folder '/vagrant-mnt/ops', '/vagrant-mnt/ops'
 
-  config.vm.define "1", primary: true
-  config.vm.define "2"
-  config.vm.define "3"
+  config.vm.define '1', primary: true
+  config.vm.define '2'
+  config.vm.define '3'
 end
