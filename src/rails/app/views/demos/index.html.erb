@@ -7,7 +7,7 @@
 <table class="table table-striped">
   <% @demos.each do |demo| %>
     <tr>
-      <td class="demo-thumbnail"><%= link_to image_tag(demo.img, :class => "demo-thumbnail"), demo_path(demo) %></td>
+      <td><%= link_to image_tag(demo.img + '.png', :class => "demo-thumbnail"), demo_path(demo) %><%= link_to image_tag(demo.img + '-p.png', :class => "demo-thumbnail-p"), demo_path(demo) %></td>
       <td>
         <h2><%= link_to demo.title, demo_path(demo) %></h2>
         <p><%= demo.short_desc %></p>

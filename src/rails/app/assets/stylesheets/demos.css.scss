@@ -3,19 +3,49 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .demo-thumbnail {
-  width: 128px
+  width: 256px;
+  display: none
+}
+
+.demo-thumbnail-p {
+  width: 128px;
+  display: none
 }
 
 .demo-detail {
   padding-bottom: 20px
 }
 
-;
 .demo-detail-thumbnail {
+  width: 512px;
+  float: right;
+  margin: 0 0 20px 20px;
+  display: none
+}
+
+.demo-detail-thumbnail-p {
   width: 256px;
   float: right;
-  margin-left: 10px;
-  margin-bottom: 10px
+  margin: 0 0 20px 20px;
+  display: none
+}
+
+@media (min-width: 768px) {
+  .demo-thumbnail {
+        display: inline;
+  }
+  .demo-detail-thumbnail {
+        display: inline;
+  }
+}
+
+@media (max-width: 767px) {
+  .demo-thumbnail-p {
+        display: inline;
+  }
+  .demo-detail-thumbnail-p {
+        display: inline;
+  }
 }
 
 #demo-tab-content {
