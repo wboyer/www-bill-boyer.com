@@ -1,0 +1,18 @@
+#!/bin/bash
+
+src=$1
+
+sed \
+-e 's///' \
+
+-e 's/\
+<%= javascript_include_tag "/js/head.min.js" %>$/{\
+<%= stylesheet_link_tag "/css/site.css" %>
+<%= stylesheet_link_tag "application" %>
+<%= csrf_meta_tags %>
+
+< ${src}/_header.html.erb > header.php
+
+sed \
+-e 's/<%= javascript_include_tag "application" %>/<script src="/assets/application.js"></script>/' \
+< ${src}/_footer.html.erb > /footer.php

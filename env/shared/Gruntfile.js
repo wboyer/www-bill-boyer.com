@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
 
+	grunt.wpThemeDir = '/wordpress/wp-content/themes/blog.bill-boyer.com';
+
 	grunt.initConfig({
 
 		compass: {
@@ -73,28 +75,31 @@ module.exports = function(grunt) {
 
 		shell: {
 			'copy-docroot': {
-				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/ <%= grunt.option("dest") %>/www/docroot'
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/src/www/ <%= grunt.option("dest") %>/www/docroot'
 			},
 			'copy-wp': {
-				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/wordpress/theme <%= grunt.option("dest") %>/wordpress/wp-content/themes/blog.bill-boyer.com'
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/src<%= grunt.wpThemeDir %>/ <%= grunt.option("dest") %><%= grunt.wpThemeDir %>'
 			},
 			'copy-rails': {
-				command: 'rsync -rt --delete --exclude .git --exclude tmp --exclude log <%= grunt.option("src") %>/src/rails/ <%= grunt.option("dest") %>/rails/www.bill-boyer.com'
+				command: 'rsync -rt --delete --exclude tmp --exclude log <%= grunt.option("src") %>/src/rails/ <%= grunt.option("dest") %>/rails/www.bill-boyer.com'
 			},
 			'build-themes': {
-				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/css/themes/ <%= grunt.option("dest") %>/www/dist/css/themes'
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/src/www/css/themes/ <%= grunt.option("dest") %>/www/dist/css/themes'
 			},
 			'build-fonts': {
-				command: 'rsync -rt --delete --exclude .git <%= grunt.option("src") %>/src/www/fonts/ <%= grunt.option("dest") %>/www/dist/css/themes/fonts'
+				command: 'rsync -rt --delete <%= grunt.option("src") %>/src/www/fonts/ <%= grunt.option("dest") %>/www/dist/css/themes/fonts'
 			},
 			'build-rails': {
 				command: 'cd <%= grunt.option("dest") %>/rails/www.bill-boyer.com; bundle update; RAILS_ENV=production bundle exec rake assets:precompile'
 			},
 			'build-wp': {
-				command: 'cd <%= grunt.option("dest") %>/wordpress/wp-content/themes/blog.bill-boyer.com; ./copy-from-rails <%= grunt.option("dest") %>/rails/app/views/layout'
+				command: 'cd <%= grunt.option("dest") %><%= grunt.wpThemeDir %>; ./copy-from-rails <%= grunt.option("dest") %>/rails/app/views/layout'
 			},
 			'deploy-www': {
 				command: 'rsync -rt --delete <%= grunt.option("src") %>/www/ <%= grunt.option("dest") %>/www'
+			},
+			'deploy-wp': {
+				command: 'rsync -rt --delete <%= grunt.option("src") %><%= grunt.wpThemeDir %>/ <%= grunt.option("dest") %><%= grunt.wpThemeDir %>'
 			},
 			'deploy-node': {
 				command: 'rsync -rt --delete <%= grunt.option("src") %>/node/dist/ <%= grunt.option("dest") %>/node/dist'
@@ -140,13 +145,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-rails']);
-	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'compass', 'shell:build-themes', 'shell:build-fonts', 'shell:build-rails']);
+	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-wp', 'shell:copy-rails']);
+	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'compass', 'shell:build-themes', 'shell:build-fonts', 'shell:build-wp', 'shell:build-rails']);
 	grunt.registerTask('bounce', ['shell:bounce-apache', 'shell:bounce-passenger', 'shell:bounce-node']);
 
 	grunt.registerTask('copy-build', ['copy', 'build']);
 	grunt.registerTask('copy-build-bounce', ['copy-build', 'bounce']);
 
-	grunt.registerTask('deploy', ['shell:deploy-www', 'shell:deploy-node', 'shell:deploy-rails']);
+	grunt.registerTask('deploy', ['shell:deploy-www', 'shell:deploy-wp', 'shell:deploy-node', 'shell:deploy-rails']);
 	grunt.registerTask('deploy-bounce', ['deploy', 'bounce']);
 };

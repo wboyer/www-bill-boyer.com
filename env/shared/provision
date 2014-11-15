@@ -42,7 +42,7 @@ cat > /etc/apache2/sites-available/default <<EOF
   Alias /js /srv/www/dist/js
   Alias /css /srv/www/dist/css
   Alias /dist /srv/www/dist
-  Alias /blog /srv/www/wordpress
+  Alias /blog /srv/wordpress
 
   ProxyPass /js !
   ProxyPass /css !
