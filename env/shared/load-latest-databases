@@ -1,0 +1,17 @@
+#!/bin/bash
+
+tmp=`mktemp -d`
+cd $tmp
+
+tar xvf /vagrant/tmp/mongodb.dump
+mongorestore dump
+
+cd /srv/wordpress/wp-content/database
+cp /vagrant/tmp/wordpress.sqlite .ht.sqlite
+chown www-data .ht.sqlite
+
+cd /srv/rails/www.bill-boyer.com/db
+cp /vagrant/tmp/rails.sqlite development.sqlite3
+cp /vagrant/tmp/rails.sqlite production.sqlite3
+
+rm -rf $tmp

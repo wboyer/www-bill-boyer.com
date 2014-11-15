@@ -1,4 +1,5 @@
 $imageId = 'ami-986bffa8'
+$provision = 'provision'
 
 if ARGV[0] == 'up'
   hash = `../shared/hash-provisioning-scripts`
@@ -6,7 +7,6 @@ if ARGV[0] == 'up'
 
   if cachedImageId != ''
     $imageId = cachedImageId
-  else
-    $provision = 'provision'
+    $provision = '../shared/load-latest-databases'
   end
 end

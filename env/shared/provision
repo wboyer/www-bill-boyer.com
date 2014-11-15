@@ -75,19 +75,7 @@ service apache2 restart
 
 curl http://localhost/blog/
 
-tmp=`mktemp -d`
-cd $tmp
-cp /vagrant/tmp/mongodb.dump .
-tar xvf mongodb.dump
-mongorestore dump
-cd
-rm -rf $tmp
-
-cp /vagrant/tmp/wordpress.sqlite /srv/www/wordpress/wp-content/database/.ht.sqlite
-chown www-data /srv/www/wordpress/wp-content/database/.ht.sqlite
-
-cp /vagrant/tmp/rails.sqlite /srv/rails/www.bill-boyer.com/db/development.sqlite3
-cp /vagrant/tmp/rails.sqlite /srv/rails/www.bill-boyer.com/db/production.sqlite3
+/vagrant-mnt/env/shared/load-latest-databases
 
 cd /srv/www
 rm -rf dist
