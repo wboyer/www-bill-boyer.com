@@ -92,9 +92,6 @@ module.exports = function(grunt) {
 			'build-rails': {
 				command: 'cd <%= grunt.option("dest") %>/rails/www.bill-boyer.com; bundle update; RAILS_ENV=production bundle exec rake assets:precompile'
 			},
-			'build-wp': {
-				command: 'cd <%= grunt.option("dest") %><%= grunt.wpThemeDir %>; ./copy-from-rails <%= grunt.option("dest") %>/rails/app/views/layout'
-			},
 			'deploy-www': {
 				command: 'rsync -rt --delete <%= grunt.option("src") %>/www/ <%= grunt.option("dest") %>/www'
 			},
@@ -131,6 +128,10 @@ module.exports = function(grunt) {
 				files: ['<%= grunt.option("src") %>/src/www/**'],
 				tasks: ['shell:copy-docroot']
 			},
+			wp: {
+				files: ['<%= grunt.option("src") %>/src/wordpress/**'],
+				tasks: ['shell:copy-wp']
+			},
 			rails: {
 				files: ['<%= grunt.option("src") %>/src/rails/**'],
 				tasks: ['shell:copy-rails', 'shell:build-rails', 'shell:bounce-passenger']
@@ -146,7 +147,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.registerTask('copy', ['shell:copy-docroot', 'shell:copy-wp', 'shell:copy-rails']);
-	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'compass', 'shell:build-themes', 'shell:build-fonts', 'shell:build-wp', 'shell:build-rails']);
+	grunt.registerTask('build', ['jshint', 'concat', 'uglify', 'compass', 'shell:build-themes', 'shell:build-fonts', 'shell:build-rails']);
 	grunt.registerTask('bounce', ['shell:bounce-apache', 'shell:bounce-passenger', 'shell:bounce-node']);
 
 	grunt.registerTask('copy-build', ['copy', 'build']);

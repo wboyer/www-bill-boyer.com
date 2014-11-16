@@ -10,9 +10,11 @@ cp ../../env/shared/bower.json .
 cp ../../env/shared/.bowerrc .
 ./node_modules/bower/bin/bower --allow-root install
 
-mkdir ../rails
+mkdir -p ../rails
 cp ../../env/shared/Gruntfile.js .
 grunt copy-build --src=../.. --dest=..
+
+mkdir -p ../wordpress/wp-content/themes/blog.bill-boyer.com
 
 # test
 # publish to artifact repository

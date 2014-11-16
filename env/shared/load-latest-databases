@@ -7,8 +7,8 @@ tar xvf /vagrant/tmp/mongodb.dump
 mongorestore dump
 
 cd /srv/wordpress/wp-content/database
-cp /vagrant/tmp/wordpress.sqlite .ht.sqlite
-chown www-data .ht.sqlite
+cp /vagrant/tmp/wordpress.sqlite db.sqlite
+chown www-data db.sqlite
 
 cd /srv/rails/www.bill-boyer.com/db
 cp /vagrant/tmp/rails.sqlite development.sqlite3
