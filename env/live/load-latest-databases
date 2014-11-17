@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/vagrant-mnt/env/shared/load-latest-databases www.bill-boyer.com

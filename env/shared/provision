@@ -1,12 +1,13 @@
 #!/bin/bash
 
-if [ $# != 1 ] ;
+if [ $# != 2 ] ;
 then
-	echo "Usage: provision <env>"
+	echo "Usage: provision <env> <hostname>"
 	exit 1
 fi
 
 env=$1
+hostname=$2
 
 ops=/vagrant-mnt/ops/scripts
 path=$ops/provision/ubuntu
@@ -75,7 +76,7 @@ service apache2 restart
 
 curl http://localhost/blog/
 
-/vagrant-mnt/env/shared/load-latest-databases
+/vagrant-mnt/env/shared/load-latest-databases $hostname
 
 cd /srv/www
 rm -rf dist

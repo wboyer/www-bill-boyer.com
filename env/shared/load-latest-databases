@@ -1,5 +1,7 @@
 #!/bin/bash
 
+hostname=$1
+
 tmp=`mktemp -d`
 cd $tmp
 
@@ -9,6 +11,22 @@ mongorestore dump
 cd /srv/wordpress/wp-content/database
 cp /vagrant/tmp/wordpress.sqlite db.sqlite
 chown www-data db.sqlite
+
+sqlite3 db.sqlite <<EOF
+  UPDATE wp_posts SET guid = replace(guid, 'www.bill-boyer.com','$hostname');
+  UPDATE wp_posts SET post_content = replace(post_content, 'www.bill-boyer.com','$hostname');
+  UPDATE wp_postmeta SET meta_value = replace(meta_value, 'www.bill-boyer.com','$hostname');
+  UPDATE wp_options SET option_value = replace(option_value, 'www.bill-boyer.com','$hostname') WHERE option_name = 'home' OR option_name = 'siteurl';
+
+  UPDATE wp_options SET option_value = '0' WHERE option_name = 'blog_public';
+
+  UPDATE wp_posts SET guid = replace(guid, 'localhost','$hostname');
+  UPDATE wp_posts SET post_content = replace(post_content, 'localhost','$hostname');
+  UPDATE wp_postmeta SET meta_value = replace(meta_value, 'localhost','$hostname');
+  UPDATE wp_options SET option_value = replace(option_value, 'localhost','$hostname') WHERE option_name = 'home' OR option_name = 'siteurl';
+
+  UPDATE wp_options SET option_value = '0' WHERE option_name = 'blog_public';
+EOF
 
 cd /srv/rails/www.bill-boyer.com/db
 cp /vagrant/tmp/rails.sqlite development.sqlite3
