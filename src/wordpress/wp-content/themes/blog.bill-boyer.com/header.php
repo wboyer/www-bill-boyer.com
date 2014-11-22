@@ -6,23 +6,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 
-	<title><?php
-			global $page_title;
-			if (!empty($page_title))
-				echo $page_title . ' | ';
-			echo 'Page Title';
-	?></title>
+	</title>
 
-	<meta name="description"
-		  content="<?php
-			global $page_description;
-			if (empty($page_description))
-				echo 'Page Description';
-			else {
-				echo $page_description;
-				echo 'Page Description';
-			}
-	?>">
+	<title><?php
+		if ( is_single() ) {
+			wp_title('|' ,TRUE, 'right');
+		} else {
+			echo 'Blog | ';
+		}
+    ?>bill-boyer.com</title>
+
+	<meta name="description" content="<?php
+		if ( is_single() ) {
+			single_post_title('', true); 
+		} else {
+			bloginfo('name'); echo " - "; bloginfo('description');
+		}
+    ?>" />
 
 	<?php wp_head(); ?>
 
