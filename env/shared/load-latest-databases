@@ -28,8 +28,10 @@ sqlite3 db.sqlite <<EOF
   UPDATE wp_options SET option_value = '0' WHERE option_name = 'blog_public';
 EOF
 
-cd /srv/rails/www.bill-boyer.com/db
-cp /vagrant/tmp/rails.sqlite development.sqlite3
-cp /vagrant/tmp/rails.sqlite production.sqlite3
+# For now, these databases are deployed along with the code.
+
+# cd /srv/rails/www.bill-boyer.com/db
+# cp /vagrant/tmp/rails.sqlite development.sqlite3
+# cp /vagrant/tmp/rails.sqlite production.sqlite3
 
 rm -rf $tmp
