@@ -7,7 +7,8 @@
     "mongodb": "*",
     "socket.io": "*",
     "facts-db": "https://github.com/wboyer/facts-db/archive/master.tar.gz",
-    "prioritized-queue": "https://github.com/wboyer/prioritized-queue-js/archive/master.tar.gz"
+    "prioritized-queue": "https://github.com/wboyer/prioritized-queue-js/archive/master.tar.gz",
+    "airports-db": "https://github.com/wboyer/airports-db/archive/master.tar.gz"
   },
   "devDependencies": {
     "grunt": "*",
