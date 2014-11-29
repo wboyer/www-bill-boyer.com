@@ -69,10 +69,10 @@
 
 <div class="collapse navbar-collapse" id="navbar-collapse">
 <ul id="nav-ul" class="nav navbar-nav navbar-right">
-<li><a href="/about-me">About Me</a></li>
-<li><a href="/about-this-site">About This Site</a></li>
-<li><a href="/blog/">Blog</a></li>
 <li><a href="/demos">Demos</a></li>
+<li><a href="/blog/">Blog</a></li>
+<li><a href="/about-this-site">About This Site</a></li>
+<li><a href="/about-me">About Me</a></li>
 </ul>
 </div>
 

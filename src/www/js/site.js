@@ -7,7 +7,7 @@ Site.Menu = {
 		var li = document.createElement("li");
 		li.className += " dropdown";
 		li.setAttribute("data-no-turbolink", "true");
-		nav.appendChild(li);
+		nav.insertBefore(li, nav.firstChild);
 
 		var a = document.createElement("a");
 		a.setAttribute("data-toggle", "dropdown");
