@@ -7,6 +7,6 @@ if ARGV[0] == 'up'
 
   if cachedImageId != ''
     $imageId = cachedImageId
-    $provision = 'load-latest-databases'
+    $provision = 'provision-quick'
   end
 end

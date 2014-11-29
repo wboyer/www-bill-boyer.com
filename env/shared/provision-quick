@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ $# != 2 ] ;
+then
+	echo "Usage: provision <env> <hostname>"
+	exit 1
+fi
+
+env=$1
+hostname=$2
+
+ops=/vagrant-mnt/ops/scripts
+path=$ops/provision/ubuntu
+
+$path/prompt www.bill-boyer.com $env
+
+/vagrant-mnt/env/shared/load-latest-databases $hostname

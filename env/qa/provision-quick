@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/vagrant-mnt/env/shared/provision-quick qa qa.bill-boyer.com

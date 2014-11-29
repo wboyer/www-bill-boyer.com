@@ -12,7 +12,8 @@ hostname=$2
 ops=/vagrant-mnt/ops/scripts
 path=$ops/provision/ubuntu
 
-$path/base www.bill-boyer.com $env $ops
+$path/base $ops
+$path/prompt www.bill-boyer.com $env
 $path/git
 $path/apache
 $path/php
