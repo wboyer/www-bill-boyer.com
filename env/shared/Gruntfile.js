@@ -98,6 +98,9 @@ module.exports = function(grunt) {
 			'deploy-wp': {
 				command: 'rsync -rt --delete <%= grunt.option("src") %><%= grunt.wpThemeDir %>/ <%= grunt.option("dest") %><%= grunt.wpThemeDir %>'
 			},
+			'patch-wp': {
+				command: "curl http://localhost/ | grep '<link href=\"/assets/' > <%= grunt.option('dest') %><%= grunt.wpThemeDir %>/header-assets.php; curl http://localhost/ | grep '<script src=\"/assets/' > <%= grunt.option('dest') %><%= grunt.wpThemeDir %>/footer-assets.php"
+			},
 			'deploy-node': {
 				command: 'rsync -rt --delete <%= grunt.option("src") %>/node/dist/ <%= grunt.option("dest") %>/node/dist'
 			},
@@ -154,5 +157,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('copy-build-bounce', ['copy-build', 'bounce']);
 
 	grunt.registerTask('deploy', ['shell:deploy-www', 'shell:deploy-wp', 'shell:deploy-node', 'shell:deploy-rails']);
-	grunt.registerTask('deploy-bounce', ['deploy', 'bounce']);
+	grunt.registerTask('deploy-bounce', ['deploy', 'bounce', 'shell:patch-wp']);
 };
