@@ -36,7 +36,7 @@
 
 </div>
 
-include('./footer-assets.php');
+<?php include('./footer-assets.php'); ?>
 
 <script src="/js/site.min.js"></script>
 

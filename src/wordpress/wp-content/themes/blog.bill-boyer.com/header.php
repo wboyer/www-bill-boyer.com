@@ -31,7 +31,7 @@
     <script src="/js/head.min.js"></script>
     <link href="/css/site.css" media="screen" rel="stylesheet" />
 
-    include('./header-assets.php');
+    <?php include('./header-assets.php'); ?>
 </head>
 
 <body>
