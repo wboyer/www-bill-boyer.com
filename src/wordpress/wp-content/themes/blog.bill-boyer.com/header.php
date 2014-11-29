@@ -6,34 +6,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 
-	</title>
+    </title>
 
-	<title><?php
-		if ( is_single() ) {
-			wp_title('|' ,TRUE, 'right');
-		} else {
-			echo 'Blog | ';
-		}
+    <title><?php
+        if ( is_single() ) {
+            wp_title('|' ,TRUE, 'right');
+        } else {
+            echo 'Blog | ';
+        }
     ?>bill-boyer.com</title>
 
-	<meta name="description" content="<?php
-		if ( is_single() ) {
-			single_post_title('', true); 
-		} else {
-			bloginfo('name'); echo " - "; bloginfo('description');
-		}
+    <meta name="description" content="<?php
+        if ( is_single() ) {
+            single_post_title('', true); 
+        } else {
+            bloginfo('name'); echo " - "; bloginfo('description');
+        }
     ?>" />
 
-	<?php wp_head(); ?>
+    <?php wp_head(); ?>
 
     <link id="theme" type="text/css" rel="stylesheet" href="/css/themes/cerulean/bootstrap.css" />
 
     <script src="/js/head.min.js"></script>
     <link href="/css/site.css" media="screen" rel="stylesheet" />
-    <link href="/assets/application.css?body=1" media="screen" rel="stylesheet" />
-    <link href="/assets/demos.css?body=1" media="screen" rel="stylesheet" />
-    <link href="/assets/deployment_pipeline.css?body=1" media="screen" rel="stylesheet" />
-    <link href="/assets/welcome.css?body=1" media="screen" rel="stylesheet" />
+
+    include('./header-assets.php');
 </head>
 
 <body>
