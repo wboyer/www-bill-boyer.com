@@ -6,7 +6,7 @@ tmp=`mktemp -d`
 cd $tmp
 
 tar xvf /vagrant/tmp/mongodb.dump
-mongorestore dump
+mongorestore --drop dump
 
 cd /srv/wordpress/wp-content/database
 cp /vagrant/tmp/wordpress.sqlite db.sqlite
