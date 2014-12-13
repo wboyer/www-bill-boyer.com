@@ -8,6 +8,7 @@
     "socket.io-client": null,
     "typeahead.js": null,
     "airports-js": "https://github.com/wboyer/airports-js.git",
+    "unicode-utils-js": "https://github.com/wboyer/unicode-utils-js.git",
     "facts-js": "https://github.com/wboyer/facts-js.git",
     "prioritized-queue": "https://github.com/wboyer/prioritized-queue-js.git",
     "requirejs": null
