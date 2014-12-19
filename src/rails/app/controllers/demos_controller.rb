@@ -1,6 +1,6 @@
 class DemosController < ApplicationController
   def index
-    @demos = Demo.all
+    @demos = Demo.order("created_at DESC")
   end
 
   def create
