@@ -8,7 +8,7 @@ require('facts-db').addRoutes(app);
 
 var pq = require('prioritized-queue');
 
-var scheduler = pq.newScheduler(4, 100, 2, 3, 10, true, io);
+var scheduler = pq.newScheduler(4, 100, 2, 3, 10, -1, true, io);
 
 pq.addRoutes(app, scheduler);
 pq.listenOnSocket(io, scheduler);
