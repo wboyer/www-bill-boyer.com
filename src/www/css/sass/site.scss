@@ -47,6 +47,27 @@ footer {
   margin: 0px;
 }
 
+.player-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 320px;
+  height: 180px;
+}
+
+@media (min-width: 540px) {
+  .player-container {
+    width: 480px;
+    height: 270px;
+  }
+}
+
+@media (min-width: 720px) {
+  .player-container {
+    width: 640px;
+    height: 360px;
+  }
+}
+
 @media (min-width: 1200px) {
   .left-col {
 	padding-left: 0px;

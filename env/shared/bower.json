@@ -11,6 +11,7 @@
     "unicode-utils-js": "https://github.com/wboyer/unicode-utils-js.git",
     "facts-js": "https://github.com/wboyer/facts-js.git",
     "prioritized-queue": "https://github.com/wboyer/prioritized-queue-js.git",
-    "requirejs": null
+    "requirejs": null,
+    "video.js": null
   }
 }
