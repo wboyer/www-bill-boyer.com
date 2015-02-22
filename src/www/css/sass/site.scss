@@ -50,8 +50,8 @@ footer {
 .player-container {
   margin-left: auto;
   margin-right: auto;
-  width: 320px;
-  height: 180px;
+  width: 288px;
+  height: 162px;
 }
 
 @media (min-width: 540px) {
@@ -65,6 +65,13 @@ footer {
   .player-container {
     width: 640px;
     height: 360px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .player-container {
+    width: 768px;
+    height: 432px;
   }
 }
 

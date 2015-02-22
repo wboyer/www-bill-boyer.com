@@ -19,17 +19,17 @@
 <h2>site architecture</h2>
 
 <p>
-This is a Rails site, currently running on Passenger, with Apache in front and SQLite in back. I also have Node.js and MongoDB behind Apache, mainly to serve the JSON API used by the <a href="/demos">demos</a>.  Finally, I intend to add a Wordpress-based blog soon.
+This is a <a href="http://rubyonrails.org/">Rails</a> site running on <a href="https://www.phusionpassenger.com/">Passenger</a>, with <a href="http://httpd.apache.org/">Apache</a> in front and <a href="http://www.sqlite.org/">SQLite</a> in back. I also have <a href="http://nodejs.org/">Node.js</a> and <a href="http://www.mongodb.org/">MongoDB</a> behind Apache, mainly to serve the JSON API used by the <a href="/demos">demos</a>.  Finally, there's an instance of <a href="https://wordpress.org/">Wordpress</a> hosting the <a href="/blog">blog</a>.  It's also backed by SQLite.
 </p>
 
 <p>
-The source code for the site overall is at <a href="https://github.com/wboyer/www-bill-boyer.com">www-bill-boyer.com</a> on Github, although individual <a href="/demos">demos</a> rely on code from other repos.
+The source code for the site overall is at <a href="https://github.com/wboyer/www-bill-boyer.com">www-bill-boyer.com</a> on Github, although individual <a href="/demos">demos</a> tend to draw their code from their own separate repos.
 </p>
 
 <p>
-The site is hosted on AWS, and in addition to coding the site itself, I've put a lot of effort into scripting the management of the AWS infrastructure, and developing an efficient <a href="/about-this-site/deployment-pipeline">build/deploy pipeline</a> for publishing new releases.
+The site is hosted on <a href="http://aws.amazon.com/">AWS</a>, and in addition to coding the site itself, I've put significant effort into scripting the management of the AWS infrastructure, and developing an efficient <a href="/about-this-site/deployment-pipeline">build/deploy pipeline</a> for publishing new releases.  <a href="https://www.vagrantup.com/">Vagrant</a> has been a great help with that.
 </p>
 
 <p>
-<a href="https://github.com/wboyer/ops-bill-boyer.com">ops-bill-boyer.com</a> contains the bulk of this ops-related code.
+<a href="https://github.com/wboyer/ops-bill-boyer.com">ops-bill-boyer.com</a> contains the bulk of my ops-related code.
 </p>
