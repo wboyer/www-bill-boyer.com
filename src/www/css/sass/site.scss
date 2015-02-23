@@ -75,12 +75,16 @@ footer {
   }
 }
 
+.right-col {
+  margin-bottom: 30px;
+}
+
 @media (min-width: 1200px) {
   .left-col {
-	padding-left: 0px;
+    padding-left: 0px;
   }
   .right-col {
-	padding-right: 0px;
+    padding-right: 0px;
   }
 }
 
