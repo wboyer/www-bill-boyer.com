@@ -48,6 +48,12 @@
   }
 }
 
+@media (max-width: 479px) {
+  .demo-detail-thumbnail-p {
+    width: 180px;
+  }
+}
+
 #demo-tab-content {
   overflow: hidden
 }
