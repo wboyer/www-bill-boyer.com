@@ -34,12 +34,6 @@ cat > /etc/apache2/sites-available/default <<EOF
   ServerAlias *.compute.amazonaws.com
 
   DocumentRoot /srv/www/docroot
-  <Directory /srv/www/docroot/>
-    Options Indexes FollowSymLinks MultiViews
-    AllowOverride All
-    Order allow,deny
-    allow from all
-  </Directory>
 
   Alias /js /srv/www/dist/js
   Alias /css /srv/www/dist/css
@@ -72,6 +66,8 @@ cat > /etc/apache2/sites-available/default <<EOF
   Redirect permanent / http://www.bill-boyer.com/
 </VirtualHost>
 EOF
+
+a2dismod autoindex
 
 service apache2 restart
 
