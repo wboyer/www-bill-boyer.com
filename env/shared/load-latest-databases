@@ -32,6 +32,7 @@ EOF
 
 # cd /srv/rails/www.bill-boyer.com/db
 # cp /vagrant/tmp/rails.sqlite development.sqlite3
+# cp /vagrant/tmp/rails.sqlite test.sqlite3
 # cp /vagrant/tmp/rails.sqlite production.sqlite3
 
 rm -rf $tmp
