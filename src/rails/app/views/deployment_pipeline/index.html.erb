@@ -2,17 +2,17 @@
 
 <h1>Build and Deployment Pipeline</h1>
 
-<p>In the development environment I've set up for myself, I've tried to implement these principles of continuous delivery:
+<p>In the development environment and process I've set up to build this site, I've tried to implement these principles of continuous delivery:
 
 <ol>
 
-<li>version control</li>
+<li>Version control &#8211; Nothing happens until changes are committed and the resulting version tagged.</li>
 
-<li>automation</li>
+<li>Testing &#8211; After a build, tests ensure that the release is valid.</li>
 
-<li>repeatability</li>
+<li>Automation &#8211; The entire process, including the provisioning of hosting infrastructure, is scripted.</li>
 
-<li>testing</li>
+<li>Repeatability &#8211; The process is repeated frequently, reducing its riskiness.</li>
 
 </ol>
 
@@ -32,7 +32,7 @@
 
 <li>Everything else runs inside an <a href="http://www.ubuntu.com">Ubuntu Linux</a> VM, hosted by <a href="http://store.vmware.com/store/vmware/en_US/pd/productID.285051300">VMware Fusion for OS X</a> and managed by <a href="http://www.vagrantup.com">Vagrant</a>. Vagrant rsyncs source files from the OSX filesystem to the VM's filesystem. Then <a href="http://gruntjs.com">Grunt</a>, running inside the VM, compiles and copies them to the places they need to go for execution. (There's more detail about this in my <a href="https://github.com/wboyer/www-bill-boyer.com/blob/master/env/shared/Gruntfile.js">Gruntfile</a>.)</li>
 
-<li>The great thing about Vagrant is that it can manage AWS instances using the exact same machine images and provisioning process as it uses for the local VM. So my local development environment is guaranteed to be identical to my AWS-based QA and production environments. I can also make AWS-based dev instances, if I want to make my code reachable over the Internet before it has been released.</li>
+<li>The great thing about Vagrant is that it can manage <a href="http://aws.amazon.com/ec2/">AWS EC2</a> instances using the exact same machine images and provisioning process as it uses for the local VM. So my local development environment is guaranteed to be identical to my EC2-based QA and production environments. I can also make EC2-based dev instances, if I want to make my code reachable over the Internet before it has been released.</li>
 
 <li>When it's time to release, I create a <a href="http://semver.org/">semver</a> tag and push it to GitHub. I then manually ask <a href="http://jenkins-ci.org">Jenkins</a>, running on my "ops" server at <a href="http://ops.bill-boyer.com">ops.bill-boyer.com</a>, to execute a job that pulls that tag, does a full build on it, tests it, and deploys it to a freshly-provisioned QA instance.</li>
 
@@ -41,7 +41,7 @@ As of now, the build artifacts just remain in the directory on the "ops" server'
 </li>
 
 <li>
-As of now, I've done all the scripting of this process myself, mostly in <a href="http://www.gnu.org/software/bash/">bash</a> and a little in <a href="https://www.ruby-lang.org/en/">Ruby</a>. Vagrant handles most of the communication with AWS, but I've done a few things myself using <a href="https://aws.amazon.com/cli/">AWS's CLI</a> and <a href="http://stedolan.github.io/jq/">jq</a> for parsing that API's JSON responses. Even though I know that tools like <a href="https://www.chef.io/chef/">Chef</a> and services like <a href="http://www.scalr.com">Scalr</a> exist to make this problem a lot easier, I wanted to do it more manually, as a learning exercise.
+As of now, I've done all the scripting of this process myself, mostly in <a href="http://www.gnu.org/software/bash/">bash</a> and a little in <a href="https://www.ruby-lang.org/en/">Ruby</a>. Vagrant handles most of the communication with AWS, but I've done a few things myself using the <a href="https://aws.amazon.com/cli/">AWS CLI</a> and <a href="http://stedolan.github.io/jq/">jq</a> for parsing that API's JSON responses. Even though I know that tools like <a href="https://www.chef.io/chef/">Chef</a> and services like <a href="http://www.scalr.com">Scalr</a> exist to make this problem a lot easier, I wanted to do it more manually, as a learning exercise.
 </li>
 
 </ul>
