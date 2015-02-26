@@ -4,7 +4,7 @@ class DemosController < ApplicationController
   end
 
   def create
-    raise 'not in production!' if ENV["RAILS_ENV"] == 'production'
+    raise 'only in development!' if ENV["RAILS_ENV"] != 'development'
 
     @demo = Demo.new(params.require(:demo).permit(:url, :title, :short_desc, :long_desc, :img, :script))
     if @demo.save
@@ -23,7 +23,7 @@ class DemosController < ApplicationController
   end
 
   def update
-    raise 'not in production!' if ENV["RAILS_ENV"] == 'production'
+    raise 'only in development!' if ENV["RAILS_ENV"] != 'development'
 
     @demo = Demo.find(params[:id])
    
@@ -35,7 +35,7 @@ class DemosController < ApplicationController
   end
 
   def destroy
-    raise 'not in production!' if ENV["RAILS_ENV"] == 'production'
+    raise 'only in development!' if ENV["RAILS_ENV"] != 'development'
 
     @demo = Demo.find(params[:id])
     @demo.destroy
