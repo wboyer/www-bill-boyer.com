@@ -1,4 +1,4 @@
-$imageId = 'ami-830f51b3'
+$imageId = 'ami-986bffa8'
 $provision = 'provision'
 
 if ARGV[0] == 'up'
